@@ -1,0 +1,33 @@
+src/components/Header.css
+header {
+    padding: 1px 14px;
+    color: black;
+  }
+  
+  .navbar {
+    border-bottom: 1px solid #dee2e6;
+    background: #000;
+  }
+  
+  .navbar-brand {
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  
+  .bg-navy {
+    background-color: navy;
+  }
+  #navbarTogglerDemo03{
+    text-emphasis-color: #ffff;
+    background: #ffff;
+  }
+
+  .search-bar{
+    margin: auto;
+    padding-left: 5%;
+  }
+  .search-input{
+    padding: 44%;
+
+  }

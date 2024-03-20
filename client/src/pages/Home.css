@@ -1,0 +1,18 @@
+.card{
+    width: fit-content;
+}
+
+/* In your CSS file or style block */
+/* In your CSS file or style block */
+.custom-carousel .carousel-inner {
+    transition: transform 6s slide; /* Adjust the duration and easing function as needed */
+  }
+  
+  .custom-carousel .carousel-inner .carousel-item {
+    display: none;
+  }
+  
+  .custom-carousel .carousel-inner .carousel-item.active {
+    display: block;
+  }
+  

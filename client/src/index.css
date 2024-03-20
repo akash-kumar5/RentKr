@@ -1,0 +1,90 @@
+In your CSS file or style block
+::-webkit-scrollbar {
+    background-color: #333;
+    width: 12px; 
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: #333; 
+    border-radius: 10px; 
+  }
+  
+  ::-webkit-scrollbar-track {
+    background-color: black; 
+  }
+
+  *{
+    margin: 0;
+    padding: 0;
+  }
+  
+  .card{
+    transition: transform 0.2s ease;
+    box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.18);
+    border-radius: 0;
+    border: 0;
+    width: 90%;
+    margin-bottom: 1.5em;
+    margin: 5% 8%;
+}
+.card:hover, Link:hover {
+    transform: scale(1.05);
+  }
+
+  .social-menu i{
+    color: white;
+    transition: transform 0.2s ease !important;
+  }
+  
+  .social-menu i:hover{
+    transform: scale(1.05) !important;
+  }
+  
+  .social-menu .bi-instagram:hover{
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+  -webkit-background-clip: text;
+  
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 200px;
+    
+  }
+  .social-menu .bi-twitter:hover{
+    color: #00acee;
+  }
+  .social-menu .bi-facebook:hover{
+    color: #3b5998 ;
+  }
+  .social-menu .bi-linkedin:hover{
+    color: #0077b5;
+  }
+
+ 
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-content {
+  text-align: center;
+}
+
+.company-logo {
+  width: 100px;
+  height: auto;
+}
+
+.company-name {
+  font-size: 24px;
+  margin-top: 10px;
+}
+
+.welcome-text {
+  margin-top: 20px;
+}
+
+.btn-primary {
+  margin-top: 30px;
+}
