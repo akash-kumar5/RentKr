@@ -16,10 +16,10 @@ const Login = () => {
 
   const handleInput = (e) => {
     const { name, value } = e.target;
-    setUser({
-      ...user,
+    setUser((prevUser) => ({
+      ...prevUser,
       [name]: value,
-    });
+    }));
   };
 
   const handleSubmit = async (e) => {
@@ -45,11 +45,7 @@ const Login = () => {
         setIsAuthenticated(true); // Set user as authenticated
         setIsAdmin(data.isAdmin); // Set isAdmin based on response
 
-        if (data.isAdmin) {
-          navigate("/admin");
-        } else {
-          navigate("/");
-        }
+        navigate(data.isAdmin ? "/admin" : "/");
 
         alert("Login Successful");
       } else {

@@ -27,26 +27,6 @@ const HeaderAdmin = ({ handleLogoutSuccess }) => {
                 >
                   My Account
                 </a>
-                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li>
-                    <Link className="dropdown-item" to="/profile">
-                      Profile
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" to="/orders">
-                      Orders
-                    </Link>
-                  </li>
-                  <li>
-                    <hr className="dropdown-divider" />
-                  </li>
-                  <li>
-                    <button className="dropdown-item" onClick={handleLogoutSuccess}>
-                      Logout
-                    </button>
-                  </li>
-                </ul>
               </li>
               <li className="nav-item">
                 <Link className="nav-link text-light" to="/admin">

@@ -1,65 +1,81 @@
-In your CSS file or style block
+/* Webkit (Chrome, Safari, Edge) */
+
+/* Track */
 ::-webkit-scrollbar {
-    background-color: #333;
-    width: 12px; 
-  }
-  
-  ::-webkit-scrollbar-thumb {
-    background-color: #333; 
-    border-radius: 10px; 
-  }
-  
-  ::-webkit-scrollbar-track {
-    background-color: black; 
-  }
-
-  *{
-    margin: 0;
-    padding: 0;
-  }
-  
-  .card{
-    transition: transform 0.2s ease;
-    box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.18);
-    border-radius: 0;
-    border: 0;
-    width: 90%;
-    margin-bottom: 1.5em;
-    margin: 5% 8%;
+  width: 10px; /* Width of the entire scrollbar */
+  background-color: #ffe064;
 }
-.card:hover, Link:hover {
-    transform: scale(1.05);
-  }
 
-  .social-menu i{
-    color: white;
-    transition: transform 0.2s ease !important;
-  }
-  
-  .social-menu i:hover{
-    transform: scale(1.05) !important;
-  }
-  
-  .social-menu .bi-instagram:hover{
-    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+::-webkit-scrollbar:hover {
+  width: 10px; /* Width of the entire scrollbar */
+  background-color: #0b0b0b;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #111110; /* Color of the scrollbar handle */
+  border-radius: 5px; /* Rounded corners of the handle */
+  width: 1%;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #ffe064; /* Color of the scrollbar handle on hover */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.card {
+  transition: transform 0.2s ease;
+  box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.18);
+  border-radius: 0;
+  border: 0;
+  width: 90%;
+  margin-bottom: 1.5em;
+  margin: 5% 8%;
+}
+.card:hover,
+Link:hover {
+  transform: scale(1.05);
+}
+
+.social-menu i {
+  color: white;
+  transition: transform 0.2s ease !important;
+}
+
+.social-menu i:hover {
+  transform: scale(1.05) !important;
+}
+
+.social-menu .bi-instagram:hover {
+  background: radial-gradient(
+    circle at 30% 107%,
+    #fdf497 0%,
+    #fdf497 5%,
+    #fd5949 45%,
+    #d6249f 60%,
+    #285aeb 90%
+  );
   -webkit-background-clip: text;
-  
+
   background-clip: text;
   -webkit-text-fill-color: transparent;
   font-size: 200px;
-    
-  }
-  .social-menu .bi-twitter:hover{
-    color: #00acee;
-  }
-  .social-menu .bi-facebook:hover{
-    color: #3b5998 ;
-  }
-  .social-menu .bi-linkedin:hover{
-    color: #0077b5;
-  }
+}
+.social-menu .bi-twitter:hover {
+  color: #00acee;
+}
+.social-menu .bi-facebook:hover {
+  color: #3b5998;
+}
+.social-menu .bi-linkedin:hover {
+  color: #0077b5;
+}
 
- 
 .login-container {
   display: flex;
   justify-content: center;

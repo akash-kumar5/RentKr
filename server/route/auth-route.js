@@ -15,4 +15,8 @@ router.get('/profile', authController.getUserProfile);
 // Route to update user profile
 router.put('/profile', authController.updateUserProfile);
 
+router.get('/profiles', authController.getUserProfiles);
+
+router.put('/profile/:userId/admin', authController.makeAdmin);
+
 module.exports = router;

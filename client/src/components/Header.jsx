@@ -1,12 +1,13 @@
 // src/components/Header.js
 import React, { useState } from "react";
-import { Link } from "react-router-dom"; // If using React Router
+import { Link, NavLink } from "react-router-dom"; // If using React Router
 import "./Header.css"; // Import custom CSS if needed
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
+import { Nav } from "react-bootstrap";
 
 const Header = ({ isAuthenticated, handleLogoutSuccess }) => {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
 
   const handleChange = (e) => {
     setSearchQuery(e.target.value);
@@ -15,7 +16,7 @@ const Header = ({ isAuthenticated, handleLogoutSuccess }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Logic to handle form submission, e.g., perform search
-    console.log('Search submitted:', searchQuery);
+    console.log("Search submitted:", searchQuery);
   };
   return (
     <header className="bg-dark">
@@ -63,7 +64,17 @@ const Header = ({ isAuthenticated, handleLogoutSuccess }) => {
               {isAuthenticated ? (
                 // If user is authenticated, display user menu
                 <li className="nav-item dropdown">
-                  <a
+                  <ul
+                    className="dropdown-menu"
+                    aria-labelledby="navbarDropdown"
+                  >
+                    <li className="nav-item text-warning">
+                      <NavLink to={"/cartpage"}>
+                        <i className="bi bi-cart2">Cart</i>
+                      </NavLink>
+                    </li>
+                  </ul>
+                  <NavLink
                     className="nav-link dropdown-toggle text-light"
                     href="#"
                     id="navbarDropdown"
@@ -72,7 +83,8 @@ const Header = ({ isAuthenticated, handleLogoutSuccess }) => {
                     aria-expanded="false"
                   >
                     My Account
-                  </a>
+                  </NavLink>
+
                   <ul
                     className="dropdown-menu"
                     aria-labelledby="navbarDropdown"
@@ -106,6 +118,11 @@ const Header = ({ isAuthenticated, handleLogoutSuccess }) => {
               ) : (
                 // If user is not authenticated, display login and signup links
                 <>
+                    <li className="nav-item">
+                    <Link className="nav-link text-light" to="/login">
+                      Login
+                    </Link>
+                  </li>
                   <li className="nav-item">
                     <Link className="nav-link text-light" to="/login">
                       Login

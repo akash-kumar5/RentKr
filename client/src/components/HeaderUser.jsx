@@ -1,12 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import "./Header.css"; // Import custom CSS if needed
 
-const HeaderUser = ({ handleLogoutSuccess}) => {
+const HeaderUser = ({ handleLogoutSuccess }) => {
   return (
     <header className="bg-dark">
       <nav className="navbar navbar-expand-lg bg-dark">
-        <div className="container-fluid bg-dark">
+        <div className="container-fluid">
           <Link className="navbar-brand fs-1 ms-5 text-light" to="/">
             <span className="text-warning">Rent</span>Kr
           </Link>
@@ -25,12 +25,17 @@ const HeaderUser = ({ handleLogoutSuccess}) => {
             </button>
           </form>
           <div
-            className="collapse navbar-collapse bg-dark"
+            className="collapse navbar-collapse justify-content-end bg-dark"
             id="navbarTogglerDemo03"
           >
-            <ul className="navbar-nav ms-auto mb-lg-0 d-flex bg-dark">
+            <ul className="navbar-nav ms-auto mb-lg-0">
+              <li className="nav-item">
+                <NavLink className="nav-link text-light" to={"/cartpage"}>
+                  <i className="bi bi-cart2"></i> Cart
+                </NavLink>
+              </li>
               <li className="nav-item dropdown">
-                <a
+                <Link
                   className="nav-link dropdown-toggle text-light"
                   href="#"
                   id="navbarDropdown"
@@ -39,7 +44,7 @@ const HeaderUser = ({ handleLogoutSuccess}) => {
                   aria-expanded="false"
                 >
                   My Account
-                </a>
+                </Link>
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li>
                     <Link className="dropdown-item" to="/profile">

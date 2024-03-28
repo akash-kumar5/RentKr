@@ -1,0 +1,74 @@
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
+
+const SearchBar = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [matchingProducts, setMatchingProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/products");
+        const products = response.data;
+        
+        if (products && Array.isArray(products)) {
+          const filteredProducts = products.filter((product) =>
+            product.name && product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            product.category && product.category.toLowerCase().includes(searchQuery.toLowerCase())
+          );
+          setMatchingProducts(filteredProducts);
+        } else {
+          setMatchingProducts([]);
+        }
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+
+    if (searchQuery !== "") {
+      fetchProducts();
+    } else {
+      setMatchingProducts([]);
+    }
+  }, [searchQuery]);
+
+  const handleSubmit = (event) => {
+    event.preventDefault(); // Prevent default form submission behavior
+  };
+
+  const handleChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  return (
+    <div className="container">
+      <form className="d-flex search-bar my-3" onSubmit={handleSubmit}>
+        <input
+          className="form-control me-2"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+          value={searchQuery}
+          onChange={handleChange}
+        />
+        <button className="btn btn-warning" type="submit">
+          <i className="bi bi-search"></i>
+        </button>
+      </form>
+      <div className="text-warning">
+        {matchingProducts.length > 0 && (
+          <ul className="list-group col-xl-7 mx-auto">
+            {matchingProducts.map((product) => (
+              <Link to={`/products/${product._id}`} className="list-group-item list-group-item-action" key={product._id}>
+                {product.name}
+              </Link>
+            ))}
+          </ul>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default SearchBar;

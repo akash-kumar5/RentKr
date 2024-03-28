@@ -1,10 +1,21 @@
 // HeaderGuest.js
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { NavLink, Link } from "react-router-dom";
 import "./Header.css"; // Import custom CSS if needed
+import SearchBar from "./SearchBar";
 
 const HeaderGuest = () => {
-  
+  const [searchQuery , setSearchQuery] = useState('')
+  const handleChange = (event) => {
+    setSearchQuery(event.target.value);
+  }
+  const handleSubmit = (event) => {
+    event.preventDefault(); // Prevent default form submission behavior
+
+    // Perform search action with the searchQuery
+    console.log("Search query:", searchQuery);
+    
+  }
   return (
     <header className="bg-dark">
       <nav className="navbar navbar-expand-lg bg-dark">
@@ -16,21 +27,13 @@ const HeaderGuest = () => {
             className="collapse navbar-collapse bg-dark"
             id="navbarTogglerDemo03"
           >
-            <form
-            className="d-flex search-bar col-8 bg-dark border-dark"
-            role="search"
-          >
-            <input
-              className="form-control search-input"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button className="btn btn-warning" type="submit">
-              <i className="bi bi-search"></i>
-            </button>
-          </form>
+            <SearchBar />
             <ul className="navbar-nav ms-auto mb-lg-0 d-flex bg-dark">
+              <li className="nav-item">
+                <Link to="/cartpage" className="nav-link">
+                  <span className="bi bi-cart2 text-light"></span>
+                </Link>
+              </li>
               <li className="nav-item">
                 <Link className="nav-link text-light" to="/login">
                   Login
