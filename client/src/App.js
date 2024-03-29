@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuth } from "./store/auth";
 import { BrowserRouter, Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import "./index.css";
@@ -21,10 +21,12 @@ import OrderManage from "./pages/Admin/OrderManage";
 import CartPage from "./pages/CartPage";
 import Cart from "./pages/Cart";
 import CategoryPage from "./pages/Category";
+import Restricted from "./pages/Restricted";
+import CheckoutPage from "./pages/Checkout/Checkout";
+import PageNotFound from "./components/PageNotFound";
 
 function App() {
-  const { isAuthenticated, setIsAuthenticated } = useAuth();
-  const { isAdmin , setIsAdmin} = useAuth();
+  const { isAuthenticated, setIsAuthenticated, isAdmin, setIsAdmin } = useAuth();
   // const navigate = useNavigate();
 
   const handleLoginSuccess = () => {
@@ -36,6 +38,10 @@ function App() {
     setIsAdmin(false);
     // navigate('/')
   };
+
+  useEffect(() => {
+    console.log("adpp :",isAdmin);
+  })
   return (
     <BrowserRouter>
       {isAuthenticated ? (
@@ -59,14 +65,16 @@ function App() {
           element={<Login handleLoginSuccess={handleLoginSuccess} />}
         />
         <Route path="/register" element={<Register />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile/:userId" element={<Profile />} />
         <Route path="/products/:productId" element={<ProductDetail />} />
         <Route path="/products" element={<ProductPage />} />
         <Route path="/additem" element={<AddItem />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/cartpage" element={<CartPage />} />
         <Route path="/products/category/:category" element={<CategoryPage />} />
-        {/* <Route path='/*' element={<Dino />} /> */}
+        <Route path='/*' element={<PageNotFound />} />
+        <Route path="/restricted" element={<Restricted />} />
+        <Route path="/checkout" element={<CheckoutPage />} />
       </Routes>
       <Footer />
     </BrowserRouter>

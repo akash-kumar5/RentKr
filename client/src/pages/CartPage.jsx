@@ -1,5 +1,5 @@
-// CartPage.js
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const CartPage = () => {
   const [cart, setCart] = useState(() => {
@@ -7,13 +7,6 @@ const CartPage = () => {
     const storedCart = localStorage.getItem("cart");
     return storedCart ? JSON.parse(storedCart) : [];
   });
-
-  // useEffect(() => {
-  //   // Retrieve cart data from local storage
-  //   if (storedCart) {
-  //     setCart(JSON.parse(storedCart));
-  //   }
-  // }, []);
 
   const removeFromCart = (index) => {
     const updatedCart = [...cart];
@@ -26,15 +19,20 @@ const CartPage = () => {
     <div>
       <h2>Shopping Cart</h2>
       {cart.length > 0 ? (
-        <ul>
-          {cart.map((item, index) => (
-            <li key={index}>
-              {item.name} - ₹{item.price}/day
-              <button onClick={() => removeFromCart(index)}>Remove</button>
-              {/* Add remove button or any other functionality */}
-            </li>
-          ))}
-        </ul>
+        <>
+          <ul>
+            {cart.map((item, index) => (
+              <li key={index}>
+                {item.name} - ₹{item.price}/day
+                <button onClick={() => removeFromCart(index)}>Remove</button>
+                {/* Add remove button or any other functionality */}
+              </li>
+            ))}
+          </ul>
+          <Link to="/checkout" className="btn btn-primary">
+            Proceed to Checkout
+          </Link>
+        </>
       ) : (
         <p>Your cart is empty</p>
       )}

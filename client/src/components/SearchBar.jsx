@@ -42,10 +42,10 @@ const SearchBar = () => {
   };
 
   return (
-    <div className="container">
-      <form className="d-flex search-bar my-3" onSubmit={handleSubmit}>
+    <div className="container m-0">
+      <form className="d-flex my-xl-3 m-0" onSubmit={handleSubmit}>
         <input
-          className="form-control me-2"
+          className="form-control me-xl-2"
           type="search"
           placeholder="Search"
           aria-label="Search"
@@ -58,7 +58,7 @@ const SearchBar = () => {
       </form>
       <div className="text-warning">
         {matchingProducts.length > 0 && (
-          <ul className="list-group col-xl-7 mx-auto">
+          <ul className="list-group">
             {matchingProducts.map((product) => (
               <Link to={`/products/${product._id}`} className="list-group-item list-group-item-action" key={product._id}>
                 {product.name}

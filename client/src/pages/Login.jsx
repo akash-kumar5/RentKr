@@ -24,7 +24,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
       const response = await fetch("http://localhost:5000/api/auth/login", {
         method: "POST",
@@ -33,30 +33,36 @@ const Login = () => {
         },
         body: JSON.stringify(user),
       });
-
+  
       if (response.ok) {
         const data = await response.json();
-        storeTokenInLs(data.token);
+        storeTokenInLs(data);
+
         setUser({
           email: "",
           password: "",
         });
-
+  
         setIsAuthenticated(true); // Set user as authenticated
         setIsAdmin(data.isAdmin); // Set isAdmin based on response
-
-        navigate(data.isAdmin ? "/admin" : "/");
-
+        console.log("isadmin",data.isAdmin)
+        
+        
         alert("Login Successful");
       } else {
         const errorData = await response.json();
         setError(errorData.message);
+        setIsAuthenticated(false); // Set user as not authenticated
+        setIsAdmin(false); // Reset isAdmin state
       }
     } catch (error) {
       console.error("Login error:", error);
       setError("An error occurred while logging in. Please try again later.");
+      setIsAuthenticated(false); // Set user as not authenticated
+      setIsAdmin(false); // Reset isAdmin state
     }
   };
+  
 
   return (
     <div>

@@ -1,7 +1,16 @@
-import React, {Link} from 'react';
-import { NavLink } from 'react-router-dom';
+import React, {Link, useEffect} from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import {useAuth} from '../../store/auth'
+import Restricted from '../Restricted';
 
 const AdminHome = () => {
+  const { isAdmin } = useAuth();
+  const navigate = useNavigate();
+   // Check if user is not an admin and redirect immediately
+  if (!isAdmin) {
+    navigate('/');
+    return <Restricted />; // Return null to prevent rendering anything
+  }
   return (
     <div className="container mt-4">
       <h1>Welcome to Admin Dashboard</h1>

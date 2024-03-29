@@ -46,7 +46,8 @@ const login = async (req, res) => {
         msg: "Login Successful",
         token: await userExist.generateToken(),
         userId: userExist._id.toString(),
-        isAdmin: userExist.isAdmin.toString()
+        isAdmin: userExist.isAdmin,
+        isUser: "true",
       });
     } else {
       res.status(401).json({ msg: "Invalid email or password" });
@@ -56,15 +57,20 @@ const login = async (req, res) => {
   }
 };
 
+
 const getUserProfile = async (req, res) => {
   try {
-    const { userId } = req.body;
-    // Fetch user profile based on the logged-in user's ID (assuming it's stored in req.user)
-    const user = await User.findOne({ userId });
+    const {userId} = req.params;
+    console.log(userId)
+    
+    // Fetch user profile based on the requested user's ID
+    const user = await User.findById(userId);
     if (!user) {
       return res.status(404).json({ message: "User profile not found" });
     }
+
     // Return user profile data
+    console.log("userData ", user);
     res.status(200).json(user);
   } catch (error) {
     console.error("Error fetching user profile:", error);
@@ -72,16 +78,16 @@ const getUserProfile = async (req, res) => {
   }
 };
 
+
+
 // Controller function to update user profile
 const updateUserProfile = async (req, res) => {
   try {
-    const {userId} = req.body;
+    const { userId } = req.body;
     // Update user profile based on the logged-in user's ID (assuming it's stored in req.user)
-    const updatedUser = await User.findOneAndUpdate(
-      userId,
-      req.body,
-      { new: true }
-    );
+    const updatedUser = await User.findOneAndUpdate(userId, req.body, {
+      new: true,
+    });
     if (!updatedUser) {
       return res.status(404).json({ message: "User profile not found" });
     }
@@ -105,24 +111,36 @@ const getUserProfiles = async (req, res) => {
   } catch (error) {
     console.error("Error fetching user profiles:", error);
     res.status(500).json({ message: "Internal server error" });
-  }  
-};
-
-const makeAdmin = async (req, res) =>{
-  try {
-    const { userId } = req.params;
-    // Find the user by ID and update their isAdmin field to true
-    const user = await User.findByIdAndUpdate(userId, { isAdmin: true }, { new: true });
-
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-
-    res.status(200).json({ message: 'User role updated successfully', user });
-  } catch (error) {
-    console.error('Error making user admin:', error);
-    res.status(500).json({ message: 'Internal server error' });
   }
 };
 
-module.exports = { home, register, login, updateUserProfile, getUserProfile, getUserProfiles, makeAdmin };
+const makeAdmin = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    // Find the user by ID and update their isAdmin field to true
+    const user = await User.findByIdAndUpdate(
+      userId,
+      { isAdmin: true },
+      { new: true }
+    );
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.status(200).json({ message: "User role updated successfully", user });
+  } catch (error) {
+    console.error("Error making user admin:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+module.exports = {
+  home,
+  register,
+  login,
+  updateUserProfile,
+  getUserProfile,
+  getUserProfiles,
+  makeAdmin,
+};

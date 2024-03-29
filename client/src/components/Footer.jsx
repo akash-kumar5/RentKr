@@ -1,9 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import './Footer.css'
 
 export default function Footer() {
   return (
-    <div>
+    <div className="footer">
       <div>
         <div className="row bg-dark text-light sticky-bottom m-auto p-5 pb-0">
           <div className="col-lg-4 col-md-6 mb-4">

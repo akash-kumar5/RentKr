@@ -1,5 +1,3 @@
-footer {
-    margin-top: 20px;
-    padding: 10px 0;
-    background-color: #f8f9fa;
+.footer {
+  border-top: #f8f9fa 1px solid;
   }

@@ -1,15 +1,14 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useDebugValue, useEffect, useState } from "react";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false); // Add isAdmin state
+  const [user, setUser] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const storeTokenInLs = (userData) => {
+    // Assuming userData is an object with properties isUser, isAdmin, and token
     localStorage.setItem("token", userData.token);
-    setUser(userData.user);
-    setIsAdmin(userData.isAdmin); // Set isAdmin in state
   };
 
   const isAuthenticated = !!user;
@@ -21,13 +20,24 @@ export const AuthProvider = ({ children }) => {
       setUser(null);
     }
   };
+  
 
   return (
-    <AuthContext.Provider value={{ user, isAdmin, isAuthenticated, storeTokenInLs, setIsAuthenticated, setIsAdmin }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        isAdmin,
+        isAuthenticated,
+        storeTokenInLs,
+        setIsAuthenticated,
+        setIsAdmin,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
 };
+
 
 export const useAuth = () => {
   const authContextValue = useContext(AuthContext);

@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useAuth } from "../store/auth";
+import { useNavigate } from "react-router-dom";
+import Restricted from "./Restricted";
 
 const Profile = () => {
+  const { isAuthenticated } = useAuth();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -11,14 +16,15 @@ const Profile = () => {
     gender: "",
   });
 
-  useEffect(() => {
-    fetchUserData();
-  }, []);
+  if (!isAuthenticated) {
+    navigate('/');
+    return <Restricted />; // Return null to prevent rendering anything
+  }
 
   const fetchUserData = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/api/auth/profile"
+        "http://localhost:5000/api/auth/profile/${userId}"
       );
       const userData = response.data;
       setFormData({
