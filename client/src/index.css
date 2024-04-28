@@ -104,3 +104,14 @@ Link:hover {
 .btn-primary {
   margin-top: 30px;
 }
+
+/* This will change the color of the checkbox */
+.form-check-input[type="radio"] {
+  background-color: white; /* Change to whatever color you want */
+}
+
+/* This will change the color of the checkbox's tick mark */
+.form-check-input[type="radio"]:checked {
+  color: black;
+  background-color: rgb(219, 146, 1); /* Change to whatever color you want */
+}

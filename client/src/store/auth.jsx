@@ -5,10 +5,25 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [token ,setToken] = useState(localStorage.getItem("token"))
 
   const storeTokenInLs = (userData) => {
     // Assuming userData is an object with properties isUser, isAdmin, and token
-    localStorage.setItem("token", userData.token);
+    localStorage.setItem("token", userData);
+  };
+
+  const setAdmin = (userData) => {
+    // Assuming userData is an object with properties isUser, isAdmin, and token
+    localStorage.setItem("admin", userData);
+  };
+
+  let isLoggedIn = !!token;
+  console.log("auth",isLoggedIn);
+
+  const LogoutUser = () => {
+    setToken("")
+    setIsAdmin(false); // Set isAdmin to false
+    return localStorage.removeItem("token") | localStorage.removeItem("admin") | localStorage.removeItem("userId");
   };
 
   const isAuthenticated = !!user;
@@ -21,6 +36,37 @@ export const AuthProvider = ({ children }) => {
     }
   };
   
+  const userAuthentication = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/api/auth/user",{
+        method: "GET",
+        headers : {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if(response.ok){
+        const data =await response.json();
+        setUser(data);
+        localStorage.setItem("userId",data._id);
+        console.log("data",data);
+      }
+    } catch (error) {
+      console.log("Error fetching user data", error);
+    }
+  }
+
+  useEffect(() => {
+    console.log("user",user);
+    // Set isAdmin based on the value retrieved from localStorage
+    const adminValue = localStorage.getItem("admin");
+    setIsAdmin(adminValue === "true");
+    userAuthentication();
+  }, []);
+
+  useEffect(() => {
+    userAuthentication();
+  },[]);
 
   return (
     <AuthContext.Provider
@@ -30,7 +76,11 @@ export const AuthProvider = ({ children }) => {
         isAuthenticated,
         storeTokenInLs,
         setIsAuthenticated,
+        setAdmin,
         setIsAdmin,
+        LogoutUser,
+        isLoggedIn,
+        userAuthentication
       }}
     >
       {children}

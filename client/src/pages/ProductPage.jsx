@@ -22,19 +22,19 @@ const ProductPage = () => {
   }, []);
 
   return (
-    <div className="bg-dark">
+    <div className="bg-dark p-0 flex">
       <h1 className="text-center text-warning">Products</h1>
-      <div className="row">
+      <div className="row container-fluid">
         {loading ? (
           <p>Loading...</p>
         ) : (
           products.map(product => (
-            <div key={product._id} className="col-lg-4 mb-4">
-              <Link to={`/products/${product._id}`}>
-                <div className="card text-center">
-                  <div className="small-square-image-container text-center m-auto">
+            <div key={product._id} className="col-lg-4 col-sm-6 mb-4 p-0">
+              <Link to={`/products/${product._id}`} className='text-decoration-none'>
+                <div className="card text-center bg-dark text-warning ">
+                  <div className="small-square-image-container text-center m-auto ">
                     <img
-                      src={`images/product/${product.imageUrl}`}
+                      src={`${product.imageUrl}`}
                       alt={product.name}
                       className="card-img-top mx-auto small-square-image text-center"
                     />
@@ -42,7 +42,7 @@ const ProductPage = () => {
                   <div className="card-body">
                     <h3>Category : {product.category}</h3>
                     <h5 className="card-title">{product.name}</h5>
-                    <p className="card-text">{product.description}</p>
+                    {/* <p className="card-text">{product.description}</p> */}
                     <p className="card-text">Price: ₹{product.price}/day</p>
                   </div>
                 </div>

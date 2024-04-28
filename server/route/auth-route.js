@@ -11,6 +11,8 @@ router.route('/register').post(validate(signupSchema),authController.register);
 
 router.route('/login').post(authController.login);
 
+router.route('/user').get(authMiddleware,authController.user);
+
 
 router.route("/profile/:userId").get(authController.getUserProfile);
 
@@ -21,5 +23,7 @@ router.put('/profile', authController.updateUserProfile);
 router.get('/profiles', authController.getUserProfiles);
 
 router.put('/profile/:userId/admin', authController.makeAdmin);
+
+router.delete('/profile/:userId', authController.deleteUserProfile);
 
 module.exports = router;

@@ -41,6 +41,10 @@ const SearchBar = () => {
     setSearchQuery(event.target.value);
   };
 
+  const handleLinkClick = () => {
+    setSearchQuery(""); // Clear the search query when a link is clicked
+  };
+
   return (
     <div className="container m-0">
       <form className="d-flex my-xl-3 m-0" onSubmit={handleSubmit}>
@@ -56,16 +60,18 @@ const SearchBar = () => {
           <i className="bi bi-search"></i>
         </button>
       </form>
-      <div className="text-warning">
+      <div className="container justify-content-center position-relative">
+      <div className="text-warning position-absolute start-0 end-0 overflow-auto" style={{ zIndex: 9999, maxHeight: "200px"}} >
         {matchingProducts.length > 0 && (
           <ul className="list-group">
             {matchingProducts.map((product) => (
-              <Link to={`/products/${product._id}`} className="list-group-item list-group-item-action" key={product._id}>
+              <Link to={`/products/${product._id}`} className="list-group-item list-group-item-action" key={product._id} onClick={handleLinkClick}>
                 {product.name}
               </Link>
             ))}
           </ul>
         )}
+      </div>
       </div>
     </div>
   );

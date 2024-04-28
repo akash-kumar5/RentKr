@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTshirt } from "@fortawesome/free-solid-svg-icons";
@@ -19,7 +19,7 @@ const Home = () => {
           <div class="carousel-item active p-4">
             <NavLink to="/products">
               <img
-                src="/images/last.png"
+                src="https://rentkrimages.s3.amazonaws.com/images/last.png"
                 class="d-block container-fluid ps-4 pe-4 pb-3"
                 alt="electric-scooty for rent"
                 style={{
@@ -32,7 +32,7 @@ const Home = () => {
           </div>
           <div class="carousel-item p-4">
             <img
-              src="/images/sneaker.png"
+              src="https://rentkrimages.s3.amazonaws.com/images/sneaker.png"
               class="d-block container-fluid ps-4 pe-4 pb-3"
               alt="electric-scooty for rent"
               style={{
@@ -44,7 +44,7 @@ const Home = () => {
           </div>
           <div class="carousel-item p-4">
             <img
-              src="/images/speaker.png"
+              src="https://rentkrimages.s3.amazonaws.com/images/speaker.png"
               class="d-block container-fluid ps-4 pe-4 pb-3"
               alt="electric-scooty for rent"
               style={{
@@ -77,26 +77,35 @@ const Home = () => {
 
       <div class="card-group container-fluid ps-5 pe-5 p-sm-2">
         <div class="card m-xl-5 m-1 rounded bg-dark btn container-fluid">
-          <h1 class="bi bi-scooter p-1 ps-0 pe-0 text-center m-auto container-fluid text-warning"></h1>
-          <div class="card-body">
-            <Link to={"/products/category/electronics"}>
-            <h5 class="card-title text-center text-warning">Two-Wheeler</h5>
-            </Link>
-          </div>
+          <Link
+            to={"/products/category/Automotive"}
+            className="text-decoration-none"
+          >
+            <h1 class="bi bi-scooter p-1 ps-0 pe-0 text-center m-auto container-fluid text-warning"></h1>
+            <div class="card-body">
+              <h5 class=" text-center text-warning text-decoration-none">
+                Two-Wheeler
+              </h5>
+            </div>
+          </Link>
         </div>
 
         <div class="card m-xl-5 m-1 rounded bg-dark container-fluid">
           <h1 class="bi bi-camera p-2 text-center text-warning m-auto container-fluid fs-1"></h1>
+            <Link to={"/products/category/camera"} className="text-decoration-none">
           <div class="card-body">
-            <h5 class="card-title text-center text-warning">Camera</h5>
+              <h5 class="card-title text-center text-warning">Camera</h5>
           </div>
+          </Link>
         </div>
 
         <div class="card m-xl-5 m-1 rounded bg-dark container-fluid">
           <h1 class="bi bi-headphones p-2 text-center m-auto container-fluid text-warning"></h1>
+            <Link to={"/products/category/electronics"} className="text-decoration-none">
           <div class="card-body">
-            <h5 class="card-title text-center text-warning">Head-Phones</h5>
+              <h5 class="card-title text-center text-warning">Head-Phones</h5>
           </div>
+        </Link>
         </div>
 
         <div class="card m-xl-5 m-1 rounded bg-dark container-fluid">
@@ -105,16 +114,20 @@ const Home = () => {
             className="text-warning text-center m-auto pb-0 pt-4"
             size="2x"
           />
-          <div class="card-body">
-            <h5 class="card-title text-center text-warning pt-2">Clothings</h5>
-          </div>
+          <Link to={"/products/category/Clothing"} className="text-decoration-none">
+            <div class="card-body">
+              <h5 class="card-title text-center text-warning">Clothings</h5>
+            </div>
+          </Link>
         </div>
 
         <div class="card m-xl-5 m-1 rounded bg-dark container-fluid">
           <h1 class="bi bi-speaker p-2 text-center m-auto container-fluid text-warning pb-0 pt-3"></h1>
+          <Link to={"/products/category/Electronics"} className="text-decoration-none">
           <div class="card-body">
             <h5 class="card-title text-center text-warning">Party Speakers</h5>
           </div>
+          </Link>
         </div>
       </div>
 

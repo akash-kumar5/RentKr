@@ -135,6 +135,43 @@ const makeAdmin = async (req, res) => {
   }
 };
 
+const user = async(req, res) => {
+  try {
+    const userData = req.user;
+    res.status(200).json(userData);
+    console.log("userdata",userData);
+  } catch (error) {
+    console.log(`req user error : ${error}`);
+  }
+}
+
+const deleteUserProfile = async (req, res) => {
+  try {
+    // Extract the userId from request parameters
+    const userId = req.params.userId;
+
+    // Check if the userId is valid
+    if (!userId) {
+      return res.status(400).json({ message: 'Invalid userId' });
+    }
+
+    // Find the user profile by userId and delete it
+    const deletedUser = await User.findByIdAndDelete(userId);
+
+    // Check if the user profile was found and deleted
+    if (!deletedUser) {
+      return res.status(404).json({ message: 'User profile not found' });
+    }
+
+    // Return a success message
+    res.status(200).json({ message: 'User profile deleted successfully' });
+  } catch (error) {
+    // Handle any errors that occur during the deletion process
+    console.error('Error deleting user profile:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
 module.exports = {
   home,
   register,
@@ -143,4 +180,6 @@ module.exports = {
   getUserProfile,
   getUserProfiles,
   makeAdmin,
+  user,
+  deleteUserProfile
 };

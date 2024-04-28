@@ -1,7 +1,7 @@
 // ProductListPage.js
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 const CategoryPage = () => {
   const { category } = useParams();
@@ -28,24 +28,28 @@ const CategoryPage = () => {
   return (
     <div>
       <h1>Products in Category: {category}</h1>
-      <ul>
-        {products.map((product) => (
-          <li key={product.id}>
-      <div className="small-square-image-container text-center m-auto">
-        <img
-          src={`images/product/${product.imageUrl}`}
-          alt={product.name}
-          className="card-img-top mx-auto small-square-image text-center"
-        />
-      </div>
-      <p>{`images/product/${product.imageUrl}`}</p>
-      <h2>{product.name}</h2>
-      <h4>{product.category}</h4>
-      <p>Description: {product.description}</p>
-      <p>Price: ₹{product.price}/day</p>
-      {/* Add more product details here */}
-          </li>
-        ))}
+      <ul className="row">
+        {products.map(product => (
+            <div key={product._id} className="col-lg-4 mb-4">
+              <Link to={`/products/${product._id}`}>
+                <div className="card text-center">
+                  <div className="small-square-image-container text-center m-auto">
+                    <img
+                      src={`images/product/${product.imageUrl}`}
+                      alt={product.name}
+                      className="card-img-top mx-auto small-square-image text-center"
+                    />
+                  </div>
+                  <div className="card-body">
+                    <h3>Category : {product.category}</h3>
+                    <h5 className="card-title">{product.name}</h5>
+                    <p className="card-text">{product.description}</p>
+                    <p className="card-text">Price: ₹{product.price}/day</p>
+                  </div>
+                </div>
+              </Link>
+            </div>
+          ))}
       </ul>
     </div>
   );

@@ -41,6 +41,7 @@ const Register = () => {
       if (response.ok) {
         const res_data = await response.json();
         storeTokenInLs(res_data.token);
+       
         setUser({
           username: "",
           email: "",

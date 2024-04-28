@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useAuth } from "./store/auth";
-import { BrowserRouter, Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
 import "./index.css";
 import Footer from "./components/Footer";
 import HeaderGuest from "./components/HeaderGuest";
@@ -9,11 +9,9 @@ import HeaderAdmin from "./components/HeaderAdmin";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Profile from "./pages/Profile";
 import ProductPage from "./pages/ProductPage";
 import ProductDetail from "./pages/ProductDetails";
 import AddItem from "./pages/AddItem";
-// import Dino from './components/Dino/Dino';
 import AdminHome from "./pages/Admin/AdminHome";
 import UserManage from "./pages/Admin/UserManage";
 import ProductManage from "./pages/Admin/ProductManage";
@@ -24,27 +22,30 @@ import CategoryPage from "./pages/Category";
 import Restricted from "./pages/Restricted";
 import CheckoutPage from "./pages/Checkout/Checkout";
 import PageNotFound from "./components/PageNotFound";
+import Logout from "./pages/Logout";
+import CartSummary from "./pages/CartSummary";
+import OrderSuccess from "./pages/OrderSuccess";
+import OrderPage from "./pages/OrderPage";
+import EditProduct from "./pages/Admin/EditProduct";
+import OrderDetails from "./pages/Admin/OrderDetail";
 
 function App() {
-  const { isAuthenticated, setIsAuthenticated, isAdmin, setIsAdmin } = useAuth();
-  // const navigate = useNavigate();
+
+  const { isAuthenticated, setIsAuthenticated, isAdmin, isLoggedIn } = useAuth();
 
   const handleLoginSuccess = () => {
     setIsAuthenticated(true);
   };
 
   const handleLogoutSuccess = () => {
+
     setIsAuthenticated(false);
-    setIsAdmin(false);
     // navigate('/')
   };
 
-  useEffect(() => {
-    console.log("adpp :",isAdmin);
-  })
   return (
     <BrowserRouter>
-      {isAuthenticated ? (
+      {isLoggedIn ? (
         isAdmin ? (
           <HeaderAdmin handleLogoutSuccess={handleLogoutSuccess} />
         ) : (
@@ -55,26 +56,33 @@ function App() {
       )}
 
       <Routes>
-      <Route path="/" element={<Home />} />
-        <Route path="/admin" element={<AdminHome />} />
+      {/* <Route path="/" element={<Home />} />
+        <Route path="/admin" element={<AdminHome />} /> */}
+         <Route path="/" element={isAdmin ? <Navigate to="/admin" /> : <Home />} />
+      <Route path="/admin" element={isAdmin ? <AdminHome /> : <Navigate to="/" />} />
         <Route path="/usermanage" element={<UserManage />} />
+        <Route path="/editproduct" element={<EditProduct />} />
         <Route path="/productmanage" element={<ProductManage />} />
         <Route path="/ordermanage" element={<OrderManage />} />
+        <Route path="/order/:orderId" component={<OrderDetails />} />
         <Route
           path="/login"
           element={<Login handleLoginSuccess={handleLoginSuccess} />}
         />
         <Route path="/register" element={<Register />} />
-        <Route path="/profile/:userId" element={<Profile />} />
         <Route path="/products/:productId" element={<ProductDetail />} />
         <Route path="/products" element={<ProductPage />} />
         <Route path="/additem" element={<AddItem />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/cartpage" element={<CartPage />} />
+        <Route path="/cartsummary" element={<CartSummary />} />
         <Route path="/products/category/:category" element={<CategoryPage />} />
         <Route path='/*' element={<PageNotFound />} />
         <Route path="/restricted" element={<Restricted />} />
         <Route path="/checkout" element={<CheckoutPage />} />
+        <Route path="/success" element={<OrderSuccess />} />
+        <Route path="/order" element={<OrderPage />}/>
+        <Route path="/logout" element={<Logout />} />
       </Routes>
       <Footer />
     </BrowserRouter>

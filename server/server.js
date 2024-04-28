@@ -6,6 +6,7 @@ const authRoute = require("./route/auth-route");
 const contactRoute = require("./route/contact-route")
 const productRoute = require("./route/product-route")
 const orderRoute = require("./route/order-route");
+const cartRoute = require('./route/cart-route')
 const connnectDb = require('./utils/db');
 const errorMiddleware = require("./middlewares/error-middleware");
 
@@ -22,6 +23,7 @@ app.use(express.json());
 app.use("/api/auth", authRoute);
 app.use("/api/form",contactRoute);
 app.use("/api/products",productRoute);
+app.use("/api/cart", cartRoute);
 app.use("/api/order", orderRoute);
 
 app.use(errorMiddleware);

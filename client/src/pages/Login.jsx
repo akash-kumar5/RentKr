@@ -5,7 +5,7 @@ import GoogleLgn from "../components/GoogleLgn";
 
 const Login = () => {
   const navigate = useNavigate();
-  const { storeTokenInLs, setIsAdmin, setIsAuthenticated } = useAuth();
+  const { storeTokenInLs, setAdmin, setIsAuthenticated } = useAuth();
 
   const [user, setUser] = useState({
     email: "",
@@ -35,38 +35,41 @@ const Login = () => {
       });
   
       if (response.ok) {
-        const data = await response.json();
-        storeTokenInLs(data);
+        const res_data = await response.json();
+        console.log("resdata",res_data);
+        storeTokenInLs(res_data.token);
 
         setUser({
           email: "",
           password: "",
         });
-  
+        
         setIsAuthenticated(true); // Set user as authenticated
-        setIsAdmin(data.isAdmin); // Set isAdmin based on response
-        console.log("isadmin",data.isAdmin)
+        setAdmin(res_data.isAdmin); // Set isAdmin based on response
+        console.log("isadmin",res_data.isAdmin)
         
-        
+        navigate('/');
         alert("Login Successful");
+        window.location.reload();
       } else {
         const errorData = await response.json();
         setError(errorData.message);
         setIsAuthenticated(false); // Set user as not authenticated
-        setIsAdmin(false); // Reset isAdmin state
+        setAdmin(false); // Reset isAdmin state
       }
     } catch (error) {
       console.error("Login error:", error);
       setError("An error occurred while logging in. Please try again later.");
       setIsAuthenticated(false); // Set user as not authenticated
-      setIsAdmin(false); // Reset isAdmin state
+      setAdmin(false); // Reset isAdmin state
     }
   };
   
 
   return (
     <div>
-      <h2 className="bg-dark text-warning p-3 text-center">Login</h2>
+      <h2 className="bg-dark text-warning pb-3 text-center m-0 pt-2 border-bottom">Login</h2>
+      
       <div className="bg-dark text-warning p-5 pb-0 m-0">
         <form onSubmit={handleSubmit} className="p-3">
           {error && <div className="alert alert-danger">{error}</div>}

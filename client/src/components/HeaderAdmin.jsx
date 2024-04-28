@@ -15,11 +15,6 @@ const HeaderAdmin = ({ handleLogoutSuccess }) => {
             id="navbarTogglerDemo03"
           >
             <ul className="navbar-nav ms-auto mb-lg-0 d-flex bg-dark text-light">
-              <li className="nav-item ">
-              <button className="dropdown-item" onClick={handleLogoutSuccess}>
-                      Logout
-                    </button>
-              </li>
               <li className="nav-item dropdown">
                 <Link
                   className="nav-link dropdown-toggle text-light"
@@ -41,9 +36,11 @@ const HeaderAdmin = ({ handleLogoutSuccess }) => {
                     <hr className="dropdown-divider" />
                   </li>
                   <li>
+                    <Link to={'/logout'}>
                     <button className="dropdown-item" onClick={handleLogoutSuccess}>
                       Logout
                     </button>
+                    </Link>
                   </li>
                 </ul>
               </li>

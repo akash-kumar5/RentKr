@@ -18,12 +18,14 @@ const UserManage = () => {
   };
 
   const deleteUser = async (userId) => {
+    if (window.confirm('Are you sure you want to remove this user?')){
     try {
       await axios.delete(`http://localhost:5000/api/auth/profile/${userId}`);
       fetchUsers(); // Refresh user list after deletion
     } catch (error) {
       console.error('Error deleting user:', error);
     }
+  }
   };
 
   const makeAdmin = async (userId) => {
@@ -39,10 +41,11 @@ const UserManage = () => {
   };
 
   return (
-    <div className="container mt-4">
-      <h2>User Management</h2>
-      <table className="table table-striped mt-4">
-        <thead>
+    <div className="container-fluid p-4 bg-dark text-light">
+      <h2 className='text-warning text-center'>User Management</h2>
+      <hr />
+      <table className="table table-dark bg-dark">
+        <thead className=''>
           <tr>
             <th>ID</th>
             <th>Name</th>
@@ -58,14 +61,14 @@ const UserManage = () => {
               <td>{user.email}</td>
               <td>
                 {user.isAdmin ? (
-                  <span className="text-success">Admin</span>
+                  <span className="text-warning">Admin</span>
                 ) : (
                   <>
                     <button
                       className="btn btn-danger btn-sm me-2"
                       onClick={() => deleteUser(user._id)}
                     >
-                      Delete
+                      Remove User
                     </button>
                     <button
                       className="btn btn-success btn-sm"
