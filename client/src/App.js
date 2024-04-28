@@ -1,6 +1,6 @@
 import React from "react";
 import { useAuth } from "./store/auth";
-import { BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import "./index.css";
 import Footer from "./components/Footer";
 import HeaderGuest from "./components/HeaderGuest";
@@ -30,15 +30,14 @@ import EditProduct from "./pages/Admin/EditProduct";
 import OrderDetails from "./pages/Admin/OrderDetail";
 
 function App() {
-
-  const { isAuthenticated, setIsAuthenticated, isAdmin, isLoggedIn } = useAuth();
+  const { isAuthenticated, setIsAuthenticated, isAdmin, isLoggedIn } =
+    useAuth();
 
   const handleLoginSuccess = () => {
     setIsAuthenticated(true);
   };
 
   const handleLogoutSuccess = () => {
-
     setIsAuthenticated(false);
     // navigate('/')
   };
@@ -56,15 +55,19 @@ function App() {
       )}
 
       <Routes>
-      {/* <Route path="/" element={<Home />} />
-        <Route path="/admin" element={<AdminHome />} /> */}
-         <Route path="/" element={isAdmin ? <Navigate to="/admin" /> : <Home />} />
-      <Route path="/admin" element={isAdmin ? <AdminHome /> : <Navigate to="/" />} />
+        <Route
+          path="/"
+          element={isAdmin ? <Navigate to="/admin" /> : <Home />}
+        />
+        <Route
+          path="/admin"
+          element={isAdmin ? <AdminHome /> : <Navigate to="/" />}
+        />
         <Route path="/usermanage" element={<UserManage />} />
         <Route path="/editproduct" element={<EditProduct />} />
         <Route path="/productmanage" element={<ProductManage />} />
         <Route path="/ordermanage" element={<OrderManage />} />
-        <Route path="/order/:orderId" component={<OrderDetails />} />
+        <Route path="/order/:orderId" element={<OrderDetails />} />
         <Route
           path="/login"
           element={<Login handleLoginSuccess={handleLoginSuccess} />}
@@ -77,11 +80,11 @@ function App() {
         <Route path="/cartpage" element={<CartPage />} />
         <Route path="/cartsummary" element={<CartSummary />} />
         <Route path="/products/category/:category" element={<CategoryPage />} />
-        <Route path='/*' element={<PageNotFound />} />
+        <Route path="/*" element={<PageNotFound />} />
         <Route path="/restricted" element={<Restricted />} />
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/success" element={<OrderSuccess />} />
-        <Route path="/order" element={<OrderPage />}/>
+        <Route path="/order" element={<OrderPage />} />
         <Route path="/logout" element={<Logout />} />
       </Routes>
       <Footer />
