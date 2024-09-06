@@ -78,3 +78,9 @@ Contributions are welcome! Please follow these steps:
 3. Commit your changes (`git commit -m 'Add some feature'`).
 4. Push to the branch (`git push origin feature-branch`).
 5. Open a Pull Request.
+
+
+## ScreenShots
+![Screenshot 2024-09-06 140645](https://github.com/user-attachments/assets/4fe73783-14fb-4a5a-bbe2-9ec84654e5df)
+![Screenshot 2024-09-06 140637](https://github.com/user-attachments/assets/6bbd22f3-a67c-4cbc-a92e-549fdf40e692)
+![Screenshot 2024-09-06 140421](https://github.com/user-attachments/assets/1b027b22-2af0-4f05-8bd4-26fb76c9e94a)
