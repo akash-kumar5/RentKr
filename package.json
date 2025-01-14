@@ -6,7 +6,7 @@
   "homepage": "https://akash-kumar5.github.io/RentKr",
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "gh-pages -d build"
   },
   "author": "",
   "license": "ISC",
