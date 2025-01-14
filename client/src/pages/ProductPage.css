@@ -1,16 +1,15 @@
+.small-square-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Vertically center the image */
+  
+  width: 16rem; /* Adjust the width as needed */
+  height: 14rem; /* Adjust the height as needed */
+  overflow: hidden; /* Hide any overflowing content */
+}
 
-
-  .small-square-image-container {
-    display: flex;
-    justify-content: center; /* Horizontally center the image */
-    align-items: center; /* Vertically center the image */
-    width: 100px; /* Adjust the width as needed */
-    height: 100px; /* Adjust the height as needed */
-  }
-  
-  .small-square-image {
-    max-width: 100%; /* Ensure the image does not exceed the container's width */
-    max-height: 100%; /* Ensure the image does not exceed the container's height */
-  }
-  
-  
+.small-square-image {
+  width: 100%; /* Ensure the image fills the container horizontally */
+  height: 97%; /* Ensure the image fills the container vertically */
+  object-fit: contain; /* Scale the image as large as possible while maintaining aspect ratio */
+}

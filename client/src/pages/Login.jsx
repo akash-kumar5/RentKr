@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../store/auth";
 import GoogleLgn from "../components/GoogleLgn";
 
@@ -36,7 +36,7 @@ const Login = () => {
   
       if (response.ok) {
         const res_data = await response.json();
-        console.log("resdata",res_data);
+        console.log("resdata", res_data);
         storeTokenInLs(res_data.token);
 
         setUser({
@@ -46,7 +46,7 @@ const Login = () => {
         
         setIsAuthenticated(true); // Set user as authenticated
         setAdmin(res_data.isAdmin); // Set isAdmin based on response
-        console.log("isadmin",res_data.isAdmin)
+        console.log("isadmin", res_data.isAdmin)
         
         navigate('/');
         alert("Login Successful");
@@ -67,53 +67,58 @@ const Login = () => {
   
 
   return (
-    <div>
-      <h2 className="bg-dark text-warning pb-3 text-center m-0 pt-2 border-bottom">Login</h2>
-      
-      <div className="bg-dark text-warning p-5 pb-0 m-0">
-        <form onSubmit={handleSubmit} className="p-3">
-          {error && <div className="alert alert-danger">{error}</div>}
-          <div className="form-group">
-            <label htmlFor="email" className="text-warning">
-              Email
-            </label>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              className="form-control"
-              placeholder="Enter your email"
-              value={user.email}
-              onChange={handleInput}
-              required
-            />
+    <div className="container-fluid bg-dark text-light">
+              <h2 className="text-warning text-center mb-4 pt-2">Login</h2>
+<hr />
+      <div className="row justify-content-center">
+        <div className="col-lg-7 col-md-8 col-sm-10">
+          <div className="card bg-dark text-warning">
+            <div className="card-body">
+              <form onSubmit={handleSubmit}>
+                {error && <div className="alert alert-danger">{error}</div>}
+                <div className="form-group">
+                  <label htmlFor="email" className="text-warning">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    className="form-control"
+                    placeholder="Enter your email"
+                    value={user.email}
+                    onChange={handleInput}
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="password" className="text-warning">
+                    Password
+                  </label>
+                  <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    className="form-control"
+                    placeholder="Enter your password"
+                    value={user.password}
+                    onChange={handleInput}
+                    required
+                  />
+                </div>
+                <div className="text-center mt-4">
+                  <button
+                    type="submit"
+                    className="btn btn-lg btn-dark btn-outline-warning mb-3"
+                  >
+                    Login
+                  </button><br />
+                  <Link to="/register" className="text-decoration-none text-warning">New User? Register Now.</Link>
+                </div>
+              </form>
+            </div>
           </div>
-          <div className="form-group">
-            <label htmlFor="password" className="text-warning">
-              Password
-            </label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              className="form-control"
-              placeholder="Enter your password"
-              value={user.password}
-              onChange={handleInput}
-              required
-            />
-          </div>
-          <div className="text-center mt-4">
-            <button
-              type="submit"
-              className="btn btn-lg btn-dark btn-outline-warning"
-            >
-              Login
-            </button>
-          </div>
-          <h5 className="text-center p-1 mt-3">or sign up with :</h5>
-          <GoogleLgn />
-        </form>
+        </div>
       </div>
     </div>
   );

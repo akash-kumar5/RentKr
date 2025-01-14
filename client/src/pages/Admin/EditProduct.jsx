@@ -47,9 +47,10 @@ const navigate = useNavigate();
   };
 
   return (
-    <div className="container">
-      <h2>Edit Product</h2>
-      <form onSubmit={handleSubmit}>
+    <div className="container-fluid bg-dark text-light">
+      <h2 className='text-warning text-center pt-2'>Edit Product</h2>
+      <hr />
+      <form onSubmit={handleSubmit} className='p-5 pt-0'>
         <div className="mb-3">
           <label htmlFor="name" className="form-label">Name</label>
           <input type="text" className="form-control" id="name" name="name" value={product.name} onChange={handleChange} />

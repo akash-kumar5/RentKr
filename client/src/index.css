@@ -37,10 +37,10 @@
   margin-bottom: 1.5em;
   margin: 5% 8%;
 }
-.card:hover,
+/* .card:hover,
 Link:hover {
   transform: scale(1.05);
-}
+} */
 
 .social-menu i {
   color: white;

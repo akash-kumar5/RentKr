@@ -45,7 +45,8 @@ const OrderSuccess = () => {
   }, [userId]);
 
   return (
-    <div className="container-os">
+    <div className="bg-dark">
+    <div className="container-os bg-dark">
       <div className="printer-top"></div>
 
       <div className="paper-container">
@@ -70,6 +71,7 @@ const OrderSuccess = () => {
       <div className="countdown-text text-warning">
         You are being redirected to the homepage in {countdown}...
       </div>
+    </div>
     </div>
   );
 };

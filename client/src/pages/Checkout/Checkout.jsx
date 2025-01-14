@@ -7,17 +7,16 @@ import Cart from "../Cart";
 
 const CheckoutPage = () => {
   const { user } = useAuth();
-  const totalPrice = localStorage.getItem("totalPrice");
   const [activeSection, setActiveSection] = useState(1);
   const [deliveryDetails, setDeliveryDetails] = useState({
-    firstName: "",
-    lastName: "",
-    phone: "",
+    firstName:  user ? user.firstName : "" ,
+    lastName:  user ? user.lastName : "",
+    phone:  user ? user.phone : "",
     country: "India",
-    address: "",
-    city: "",
-    state: "",
-    postalCode: "",
+    address:  user ? user.state: "",
+    city:  user ? user.city : "",
+    state:  user ? user.state : "",
+    postalCode:  user ? user.postalCode : "",
   });
 
   
@@ -55,20 +54,7 @@ const CheckoutPage = () => {
     setPaymentMethod(method);
   };
 
-  const fetchUserAddress = async (userId) => {
-    try {
-      const response = await fetch(`http:localhost:5000/api/users/${userId}/address`);
-      if (!response.ok) {
-        throw new Error("Failed to fetch user address.");
-      }
-      const addressData = await response.json();
-      setDeliveryDetails(addressData);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const renderSectionHeader = (sectionNumber, title) => {
+    const renderSectionHeader = (sectionNumber, title) => {
     return (
       <div className="mb-3">
         <h3>{title}</h3>
@@ -85,9 +71,12 @@ const CheckoutPage = () => {
   const renderPaymentMethodForm = () => {
     if (deliveryMethod === "cod") {
       return (
-        <div className="text-danger">
+        <>
+        <div className="btn text-dark bg-warning col-6 mb-3">
           Please have exact cash ready for payment upon delivery.
         </div>
+        <br />
+        </>
       );
     } else {
       return (
@@ -133,8 +122,10 @@ const CheckoutPage = () => {
       }
       const userId = user._id;
       const cartResponse = await axios.get(`http://localhost:5000/api/cart/${userId}`);
+      // console.log(cartResponse);
+      const totalPrice=cartResponse.data.totalAmount;
+      console.log(totalPrice);
     const products = cartResponse.data.items;
-    console.log(products);
       const status = "pending";
       // Prepare order data
       const orderData = {
@@ -156,6 +147,7 @@ const CheckoutPage = () => {
         },
         body: JSON.stringify(orderData),
       });
+      console.log(response);
 
       if (!response.ok) {
         throw new Error("Failed to create order.");

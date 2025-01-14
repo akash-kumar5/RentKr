@@ -5,7 +5,7 @@ import "./Header.css"; // Import custom CSS if needed
 
 const HeaderAdmin = ({ handleLogoutSuccess }) => {
   return (
-    <header className="bg-dark">
+    <header className="bg-dark text-light">
       <nav className="navbar navbar-expand-lg bg-dark">
         <div className="container-fluid bg-dark">
           <Link className="navbar-brand fs-1 ms-5 text-light" to="/admin">
@@ -27,18 +27,18 @@ const HeaderAdmin = ({ handleLogoutSuccess }) => {
                 >
                   My Account
                 </Link>
-                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li>
-                    <Link className="dropdown-item" to="/profile">
+                <ul className="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+                  {/* <li>
+                    <Link className="dropdown-item text-warning" to="/profile">
                       Profile
                     </Link>
-                  </li>
+                  </li> */}
                   <li>
                     <hr className="dropdown-divider" />
                   </li>
                   <li>
-                    <Link to={'/logout'}>
-                    <button className="dropdown-item" onClick={handleLogoutSuccess}>
+                    <Link to={'/logout'} className="text-decoration-none">
+                    <button className="dropdown-item  text-warning" onClick={handleLogoutSuccess}>
                       Logout
                     </button>
                     </Link>

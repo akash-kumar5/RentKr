@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import {Link} from "react-router-dom";
 
 const OrderPage = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
-  const userId = localStorage.getItem("userId")
+  const userId = localStorage.getItem("userId");
 
   useEffect(() => {
     const fetchOrders = async () => {
       try {
         const response = await axios.get(`http://localhost:5000/api/order/view/${userId}`);
-        console.log(response);
         setOrders(response.data);
         setLoading(false);
       } catch (error) {
@@ -20,13 +20,16 @@ const OrderPage = () => {
     };
 
     fetchOrders();
-  }, []);
+  }, [userId]);
 
   return (
-    <div className='container text-light'>
-      <h2>Orders</h2>
+    <div className='container-fluid text-light bg-dark'>
+      <h2 className='text-warning text-center'>Orders</h2>
+      <hr />
       {loading ? (
         <div>Loading...</div>
+      ) : orders.length === 0 ? (
+        <div className='text-warning text-center p-5'> No orders found. <br /> <Link to="/products" className='text-decoration-none fs-3 text-warning'>Checkout Our Rental Products <i className='bi bi-arrow-right '></i></Link></div>
       ) : (
         <div>
           {orders.map((order) => (

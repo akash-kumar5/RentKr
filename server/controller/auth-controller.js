@@ -9,7 +9,7 @@ const home = async (req, res) => {
 
 const register = async (req, res) => {
   try {
-    const { username, email, phone, password } = req.body;
+    const { email, phone, password } = req.body;
 
     const userExist = await User.findOne({ email: email });
 
@@ -17,7 +17,7 @@ const register = async (req, res) => {
       return res.status(400).json({ msg: "User already exists" });
     }
 
-    const userCreated = await User.create({ username, email, phone, password });
+    const userCreated = await User.create({ email, phone, password });
 
     res.status(201).send({
       msg: "Registration Successful",

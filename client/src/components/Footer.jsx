@@ -4,7 +4,7 @@ import './Footer.css'
 
 export default function Footer() {
   return (
-    <div className="footer">
+    <div className="footer m-0 p-0">
       <div>
         <div className="row bg-dark text-light sticky-bottom m-auto p-5 pb-0">
           <div className="col-lg-4 col-md-6 mb-4">
@@ -112,11 +112,10 @@ export default function Footer() {
             </div>
           </div>
           <div className="footer text-center text-light mt-2">
-            {/* <p>
-              © Copyright 2022<span id="demo"></span>{" "}
+            <p>
+              © Copyright 2024<span id="demo"></span>{" "}
               <span className="brand">RentKr. </span> All Rights Reserved.
-            </p> */}
-            <p>Made with 💖 by Niku cutie</p>
+            </p>
           </div>
         </div>
       </div>

@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 const CartPage = () => {
   const [cart, setCart] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
-  const fTotalPrice = totalPrice.toFixed(2);
 
   useEffect(() => {
     fetchCartData();
@@ -72,7 +71,7 @@ const CartPage = () => {
     <div className="container-fluid bg-dark text-light p-5">
       <h1 className="ms-5 text-warning">Shopping Cart</h1>
       <hr />
-      {cart.length > 0 ? (
+      {cart && cart.length > 0 ? (
         <div className="row justify-content-center">
           <div className="col-md-8">
             <ul className="list-unstyled p-5">
@@ -121,7 +120,7 @@ const CartPage = () => {
             <div className="card bg-warning text-dark">
               <div className="card-body">
                 <h5 className="card-title">Total Price</h5>
-                <p className="card-text">₹{fTotalPrice}</p>
+                <p className="card-text">₹{totalPrice.toFixed(2)}</p>
                 <Link to="/checkout" className="btn btn-dark">
                   Proceed to Checkout
                 </Link>

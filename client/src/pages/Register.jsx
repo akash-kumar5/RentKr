@@ -1,21 +1,20 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../store/auth";
 
 const Register = () => {
   const [user, setUser] = useState({
-    username: "",
     email: "",
     phone: "",
     password: "",
   });
+  const [error, setError] = useState("");
 
   const { storeTokenInLs } = useAuth();
+  const navigate = useNavigate();
 
   const handleInput = (e) => {
-    console.log(e);
-    let name = e.target.name;
-    let value = e.target.value;
+    const { name, value } = e.target;
 
     setUser({
       ...user,
@@ -23,12 +22,16 @@ const Register = () => {
     });
   };
 
-  const navigate = useNavigate();
-
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
       console.log(user);
+
+      // Perform password validation
+      if (user.password !== user.confirmPassword) {
+        console.log("Passwords do not match");
+        return; // Exit early if passwords don't match
+      }
 
       const response = await fetch("http://localhost:5000/api/auth/register", {
         method: "POST",
@@ -41,44 +44,38 @@ const Register = () => {
       if (response.ok) {
         const res_data = await response.json();
         storeTokenInLs(res_data.token);
-       
+
         setUser({
-          username: "",
           email: "",
           phone: "",
           password: "",
         });
         navigate("/");
+        alert(res_data.msg); // Alert registration success message
+        window.location.reload();
+      } else {
+        const errorData = await response.json();
+        setError(errorData.extra)
+        alert(errorData.msg); // Alert registration error message
       }
-      console.log(response);
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
   };
 
   return (
-    <div className="bg-dark text-white p-5">
-      <div className="registration-form container-fluid flex bg-dark text-white ps-5 pe-5">
-        <h1 className="text-center text-warning mb-5">Registration Form</h1>
-        <form
+    <div className="bg-dark text-white p-1">
+      <div className="bg-dark text-white ps-5 pe-5">
+        <h1 className="text-center text-warning pt-2">Registration Form</h1>
+        <hr />
+        <div className="row justify-content-center">
+          <div className="col-lg-7">
+          <form
           action=""
-          className="form-control bg-dark text-warning"
+          className="card  bg-dark text-warning"
           onSubmit={handleSubmit}
         >
-          <div className="p-3 ms-5 me-5 fs-4">
-            <label htmlFor="username">Username :</label>
-            <input
-              className="form-control"
-              type="text"
-              name="username"
-              placeholder="UserName"
-              id="username"
-              required
-              value={user.username}
-              onChange={handleInput}
-            />
-          </div>
-
+          {error && <div className="alert alert-danger">{error}</div>}
           <div className="p-3 ms-5 me-5 fs-4">
             <label htmlFor="email">Email :</label>
             <input
@@ -120,15 +117,34 @@ const Register = () => {
               onChange={handleInput}
             />
           </div>
+
+          <div className="p-3 ms-5 me-5 fs-4">
+            <label htmlFor="confirmPassword">Confirm Password :</label>
+            <input
+              className="form-control"
+              type="password"
+              name="confirmPassword"
+              placeholder="Confirm password :"
+              id="confirmPassword"
+              required
+              onChange={handleInput}
+            />
+          </div>
+
           <div className="text-center flex mt-3 mb-4">
             <button
               type="submit"
-              className="btn btn-lg margin-auto text-dark btn-warning"
+              className="btn btn-lg margin-auto text-dark btn-warning mb-2"
             >
               Register
-            </button>
+            </button><br />
+            <Link to="/login" className="text-warning text-decoration-none">Already a User? Login Now.</Link>
           </div>
+
         </form>
+          </div>
+        </div>
+
       </div>
     </div>
   );

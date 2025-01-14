@@ -75,20 +75,21 @@ const AddItem = ({ onAdd }) => {
           onChange={(e) => setCategory(e.target.value)}
         >
           <option value="">Select category</option>
-          <option value="electronics">Electronics</option>
-          <option value="clothing">Clothing</option>
-          <option value="books">Books</option>
-          <option value="two-wheeler">Two-wheeler</option>
+          <option value="Electronics">Electronics</option>
+          <option value="Clothing">Clothing</option>
+          <option value="Books">Books</option>
+          <option value="Automobile">Two-wheeler</option>
+          <option value="Instrument">Instruments</option>
           {/* Add more categories as needed */}
         </select>
       </div>
       <div>
-        <label>Image URL:</label>
+        <label>Image Name:</label>
         <input
          className='form-control p-2 pt-3 mt-2'
           type="text"
           value={imageUrl}
-          onChange={(e) => setImageUrl(e.target.value)}
+          onChange={(e) => setImageUrl(""+e.target.value)}
         />
       </div>
       <button type="submit" className='btn btn-lg btn-warning text-dark m-auto'>Add Product</button>

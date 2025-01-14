@@ -1,39 +1,50 @@
+// Cart.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const Cart = () => {
   const [cart, setCart] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
-  const fTotalPrice = totalPrice.toFixed(2);
-
 
   useEffect(() => {
     fetchCartData();
   }, []);
 
   const fetchCartData = async () => {
-    try {
-      const userId = localStorage.getItem('userId');
-      const response = await axios.get(`http://localhost:5000/api/cart/${userId}`);
-      setCart(response.data.items);
-      console.log("",response)
-      setTotalPrice(response.data.totalAmount);
-    } catch (error) {
-      console.error('Error fetching cart data:', error);
+    let cartData = [];
+    const userId = localStorage.getItem('userId');
+    
+    if (userId) {
+      // Fetch cart from backend if logged in
+      try {
+        const response = await axios.get(`http://localhost:5000/api/cart/${userId}`);
+        cartData = response.data.items;
+      } catch (error) {
+        console.error('Error fetching cart data:', error);
+      }
+    } else {
+      // If not logged in, fetch cart from localStorage
+      cartData = JSON.parse(localStorage.getItem('cart')) || [];
     }
+
+    setCart(cartData);
+    setTotalPrice(cartData.reduce((total, item) => total + item.price * item.quantity, 0));
   };
 
   const updateCartItemQuantity = async (productId, newQuantity) => {
+    const userId = localStorage.getItem('userId');
+    
     try {
-      const userId = localStorage.getItem('userId');
-      console.log("userid",userId,"prid:", productId,"quant", newQuantity);
-      await axios.put(`http://localhost:5000/api/cart/update`, {
-        userId,
-        productId,
-        quantity: newQuantity
-      });
-      console.log("update :",productId, newQuantity);
-      // After updating the quantity, fetch updated cart data
+      if (userId) {
+        await axios.put(`http://localhost:5000/api/cart/update`, { userId, productId, quantity: newQuantity });
+      } else {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const itemIndex = cart.findIndex(item => item.productId === productId);
+        if (itemIndex !== -1) {
+          cart[itemIndex].quantity = newQuantity;
+          localStorage.setItem('cart', JSON.stringify(cart));
+        }
+      }
       fetchCartData();
     } catch (error) {
       console.error('Error updating item quantity:', error);
@@ -41,8 +52,7 @@ const Cart = () => {
   };
 
   const increaseQuantity = (productId) => {
-    console.log("increasding");
-    const itemToUpdate = cart.find(item => item.productId._id === productId);
+    const itemToUpdate = cart.find(item => item.productId === productId);
     if (itemToUpdate) {
       const newQuantity = itemToUpdate.quantity + 1;
       updateCartItemQuantity(productId, newQuantity);
@@ -50,23 +60,24 @@ const Cart = () => {
   };
 
   const decreaseQuantity = (productId) => {
-    console.log("decreasing");
-
-    const itemToUpdate = cart.find(item => item.productId._id === productId);
-    
-    console.log(itemToUpdate);
+    const itemToUpdate = cart.find(item => item.productId === productId);
     if (itemToUpdate && itemToUpdate.quantity > 1) {
       const newQuantity = itemToUpdate.quantity - 1;
-      console.log(productId, newQuantity);
       updateCartItemQuantity(productId, newQuantity);
     }
   };
 
   const removeFromCart = async (productId) => {
+    const userId = localStorage.getItem('userId');
+    
     try {
-      const userId = localStorage.getItem('userId');
-      await axios.delete(`http://localhost:5000/api/cart/${userId}/${productId}`);
-      // After removing the item, fetch updated cart data
+      if (userId) {
+        await axios.delete(`http://localhost:5000/api/cart/${userId}/${productId}`);
+      } else {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cart = cart.filter(item => item.productId !== productId);
+        localStorage.setItem('cart', JSON.stringify(cart));
+      }
       fetchCartData();
     } catch (error) {
       console.error('Error removing item from cart:', error);
@@ -81,14 +92,14 @@ const Cart = () => {
             {cart.map((item, index) => (
               <li key={index}>
                 {item.productId.name} <br /> ₹{item.price}/day <br /> Quantity: {item.quantity} <br />
-                <button className='btn btn-secondary text-light' onClick={() => increaseQuantity(item.productId._id)}>+</button>
-                <button className='btn btn-secondary text-light' onClick={() => decreaseQuantity(item.productId._id)}>-</button>
-                <button className='btn btn-secondary text-light' onClick={() => removeFromCart(item.productId._id)}>Remove</button>
+                <button className='btn btn-dark text-light me-1' onClick={() => increaseQuantity(item.productId)}>+</button>
+                <button className='btn btn-dark text-light me-1' onClick={() => decreaseQuantity(item.productId)}>-</button>
+                <button className='btn btn-outline-danger text-light' onClick={() => removeFromCart(item.productId)}>Remove</button>
                 <hr />
               </li>
             ))}
           </ul>
-          <p className='text-center text-warning'>Total Price: ₹{fTotalPrice}</p>
+          <p className='text-center text-warning'>Total Price: ₹{totalPrice.toFixed(2)}</p>
         </>
       ) : (
         <p>Your cart is empty</p>

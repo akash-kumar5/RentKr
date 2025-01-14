@@ -17,7 +17,7 @@ const Home = () => {
       >
         <div class="carousel-inner " fade interval={3000}>
           <div class="carousel-item active p-4">
-            <NavLink to="/products">
+            <NavLink to="http://localhost:3000/products/662ec63d8fc391f2acb9b575">
               <img
                 src="https://rentkrimages.s3.amazonaws.com/images/last.png"
                 class="d-block container-fluid ps-4 pe-4 pb-3"
@@ -31,28 +31,32 @@ const Home = () => {
             </NavLink>
           </div>
           <div class="carousel-item p-4">
+            <NavLink to="http://localhost:3000/products/663108066731f33d7743ad5e">
             <img
               src="https://rentkrimages.s3.amazonaws.com/images/sneaker.png"
               class="d-block container-fluid ps-4 pe-4 pb-3"
-              alt="electric-scooty for rent"
+              alt="sneaker for rent"
               style={{
                 maxHeight: "36.3rem",
                 objectFit: "contain",
                 borderRadius: "70px",
               }}
             />
+            </NavLink>
           </div>
           <div class="carousel-item p-4">
+            <NavLink to="http://localhost:3000/products/662ec62f8fc391f2acb9b574">
             <img
-              src="https://rentkrimages.s3.amazonaws.com/images/speaker.png"
+              src="https://rentkrimages.s3.amazonaws.com/images/speaker_slide.png"
               class="d-block container-fluid ps-4 pe-4 pb-3"
-              alt="electric-scooty for rent"
+              alt="party speaker for rent"
               style={{
                 maxHeight: "36.3rem",
                 objectFit: "contain",
                 borderRadius: "70px",
               }}
             />
+            </NavLink>
           </div>
         </div>
         <button
@@ -78,7 +82,7 @@ const Home = () => {
       <div class="card-group container-fluid ps-5 pe-5 p-sm-2">
         <div class="card m-xl-5 m-1 rounded bg-dark btn container-fluid">
           <Link
-            to={"/products/category/Automotive"}
+            to={"/products/category/Automobile"}
             className="text-decoration-none"
           >
             <h1 class="bi bi-scooter p-1 ps-0 pe-0 text-center m-auto container-fluid text-warning"></h1>
@@ -91,19 +95,19 @@ const Home = () => {
         </div>
 
         <div class="card m-xl-5 m-1 rounded bg-dark container-fluid">
-          <h1 class="bi bi-camera p-2 text-center text-warning m-auto container-fluid fs-1"></h1>
-            <Link to={"/products/category/camera"} className="text-decoration-none">
+          <h1 class="bi bi-book p-2 text-center text-warning m-auto container-fluid fs-1"></h1>
+            <Link to={"/products/category/Book"} className="text-decoration-none">
           <div class="card-body">
-              <h5 class="card-title text-center text-warning">Camera</h5>
+              <h5 class="card-title text-center text-warning">Books</h5>
           </div>
           </Link>
         </div>
 
         <div class="card m-xl-5 m-1 rounded bg-dark container-fluid">
           <h1 class="bi bi-headphones p-2 text-center m-auto container-fluid text-warning"></h1>
-            <Link to={"/products/category/electronics"} className="text-decoration-none">
+            <Link to={"/products/category/Electronics"} className="text-decoration-none">
           <div class="card-body">
-              <h5 class="card-title text-center text-warning">Head-Phones</h5>
+              <h5 class="card-title text-center text-warning">Electronics</h5>
           </div>
         </Link>
         </div>
@@ -122,10 +126,10 @@ const Home = () => {
         </div>
 
         <div class="card m-xl-5 m-1 rounded bg-dark container-fluid">
-          <h1 class="bi bi-speaker p-2 text-center m-auto container-fluid text-warning pb-0 pt-3"></h1>
-          <Link to={"/products/category/Electronics"} className="text-decoration-none">
+          <h1 class="bi bi-music-note-beamed p-2 text-center m-auto container-fluid text-warning pb-0 pt-3"></h1>
+          <Link to={"/products/category/Instrument"} className="text-decoration-none">
           <div class="card-body">
-            <h5 class="card-title text-center text-warning">Party Speakers</h5>
+            <h5 class="card-title text-center text-warning">Instruments</h5>
           </div>
           </Link>
         </div>

@@ -28,6 +28,7 @@ import OrderSuccess from "./pages/OrderSuccess";
 import OrderPage from "./pages/OrderPage";
 import EditProduct from "./pages/Admin/EditProduct";
 import OrderDetails from "./pages/Admin/OrderDetail";
+import Profile from "./pages/Profile";
 
 function App() {
   const { isAuthenticated, setIsAuthenticated, isAdmin, isLoggedIn } =
@@ -85,6 +86,7 @@ function App() {
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/success" element={<OrderSuccess />} />
         <Route path="/order" element={<OrderPage />} />
+        <Route path="/profile"  element={<Profile />} />
         <Route path="/logout" element={<Logout />} />
       </Routes>
       <Footer />
