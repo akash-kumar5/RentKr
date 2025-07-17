@@ -17,7 +17,7 @@ const Home = () => {
       >
         <div class="carousel-inner " fade interval={3000}>
           <div class="carousel-item active p-4">
-            <NavLink to="https://rentkr.onrender.com/products/662ec63d8fc391f2acb9b575">
+            <NavLink to="https://rentkr.onrender.com/api/products/662ec63d8fc391f2acb9b575">
               <img
                 src="https://rentkrimages.s3.amazonaws.com/images/last.png"
                 class="d-block container-fluid ps-4 pe-4 pb-3"
@@ -31,7 +31,7 @@ const Home = () => {
             </NavLink>
           </div>
           <div class="carousel-item p-4">
-            <NavLink to="http://localhost:3000/products/663108066731f33d7743ad5e">
+            <NavLink to="/products/663108066731f33d7743ad5e">
             <img
               src="https://rentkrimages.s3.amazonaws.com/images/sneaker.png"
               class="d-block container-fluid ps-4 pe-4 pb-3"
@@ -45,7 +45,7 @@ const Home = () => {
             </NavLink>
           </div>
           <div class="carousel-item p-4">
-            <NavLink to="http://localhost:3000/products/662ec62f8fc391f2acb9b574">
+            <NavLink to="/products/662ec62f8fc391f2acb9b574">
             <img
               src="https://rentkrimages.s3.amazonaws.com/images/speaker_slide.png"
               class="d-block container-fluid ps-4 pe-4 pb-3"
