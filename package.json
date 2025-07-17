@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "homepage": "https://akash-kumar5.github.io/RentKr",
   "scripts": {
-    "start": "npm run start-server | npm run start-client",
-    "start-server": "cd server && npm start",
-    "start-client": "cd client && npm start"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "author": "",
   "license": "ISC",
