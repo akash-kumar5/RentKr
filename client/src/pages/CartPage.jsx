@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 const CartPage = () => {
   const [cart, setCart] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     fetchCartData();
@@ -12,71 +14,87 @@ const CartPage = () => {
 
   const fetchCartData = async () => {
     try {
+      setLoading(true);
+      setError("");
       const userId = localStorage.getItem("userId");
-      const response = await axios.get(
-        `http://localhost:5000/api/cart/${userId}`
-      );
-      setCart(response.data.items);
-      setTotalPrice(response.data.totalAmount);
-    } catch (error) {
-      console.error("Error fetching cart data:", error);
+      const response = await axios.get(`http://localhost:5000/api/cart/${userId}`);
+
+      if (response && response.data) {
+        setCart(response.data.items || []);
+        setTotalPrice(response.data.totalAmount || 0);
+      } else {
+        const cartData = JSON.parse(localStorage.getItem("cartItems")) || {};
+        setCart(cartData.items || []);
+        setTotalPrice(cartData.totalAmount || 0);
+      }
+    } catch (err) {
+      console.error("Error fetching cart data:", err);
+      setError("Failed to load cart.");
+    } finally {
+      setLoading(false);
     }
   };
 
   const updateCartItemQuantity = async (productId, newQuantity) => {
+    const userId = localStorage.getItem("userId");
     try {
-      const userId = localStorage.getItem("userId");
-      await axios.put(`http://localhost:5000/api/cart/update`, {
+      // Optimistic UI update
+      setCart(prevCart =>
+        prevCart.map(item =>
+          item.productId._id === productId
+            ? { ...item, quantity: newQuantity }
+            : item
+        )
+      );
+
+      await axios.put("http://localhost:5000/api/cart/update", {
         userId,
         productId,
         quantity: newQuantity,
       });
-      // After updating the quantity, fetch updated cart data
-      fetchCartData();
+
+      fetchCartData(); // to sync price
     } catch (error) {
       console.error("Error updating item quantity:", error);
     }
   };
 
   const increaseQuantity = (productId) => {
-    const itemToUpdate = cart.find((item) => item.productId._id === productId);
-    if (itemToUpdate) {
-      const newQuantity = itemToUpdate.quantity + 1;
-      updateCartItemQuantity(productId, newQuantity);
-    }
+    const item = cart.find(item => item.productId._id === productId);
+    if (item) updateCartItemQuantity(productId, item.quantity + 1);
   };
 
   const decreaseQuantity = (productId) => {
-    const itemToUpdate = cart.find((item) => item.productId._id === productId);
-    if (itemToUpdate && itemToUpdate.quantity > 1) {
-      const newQuantity = itemToUpdate.quantity - 1;
-      updateCartItemQuantity(productId, newQuantity);
+    const item = cart.find(item => item.productId._id === productId);
+    if (item && item.quantity > 1) {
+      updateCartItemQuantity(productId, item.quantity - 1);
     }
   };
 
   const removeItemFromCart = async (productId) => {
+    const userId = localStorage.getItem("userId");
     try {
-      const userId = localStorage.getItem("userId");
-      await axios.delete(
-        `http://localhost:5000/api/cart/${userId}/${productId}`
-      );
-      // After successful deletion, fetch updated cart data
-      fetchCartData();
+      await axios.delete(`http://localhost:5000/api/cart/${userId}/${productId}`);
+      setCart(prevCart => prevCart.filter(item => item.productId._id !== productId));
+      fetchCartData(); // refresh total price
     } catch (error) {
       console.error("Error removing item from cart:", error);
     }
   };
 
+  if (loading) return <p className="text-center mt-5">Loading...</p>;
+  if (error) return <p className="text-center text-danger mt-5">{error}</p>;
+
   return (
     <div className="container-fluid bg-dark text-light p-5">
       <h1 className="ms-5 text-warning">Shopping Cart</h1>
       <hr />
-      {cart && cart.length > 0 ? (
+      {cart.length > 0 ? (
         <div className="row justify-content-center">
           <div className="col-md-8">
             <ul className="list-unstyled p-5">
-              {cart.map((item, index) => (
-                <li key={index} className="media mb-4">
+              {cart.map((item) => (
+                <li key={item.productId._id} className="media mb-4">
                   <img
                     src={item.productId.imageUrl}
                     alt={item.productId.name}
@@ -94,9 +112,7 @@ const CartPage = () => {
                       >
                         -
                       </button>
-                      <p className="text-light me-2 fs-4 mb-0">
-                        {item.quantity}
-                      </p>
+                      <p className="text-light me-2 fs-4 mb-0">{item.quantity}</p>
                       <button
                         className="btn btn-dark text-warning me-2 fs-3"
                         onClick={() => increaseQuantity(item.productId._id)}
