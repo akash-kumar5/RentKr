@@ -12,7 +12,7 @@ const CategoryPage = () => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/products/category/${category}`
+          `https://rentkr.onrender.com/api/products/category/${category}`
         );
         setProducts(response.data);
       } catch (error) {

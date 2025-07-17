@@ -12,7 +12,7 @@ const OrderManagement = () => {
 
   const fetchOrders = async () => {
     try {
-      let url = 'http://localhost:5000/api/order/viewall';
+      let url = 'https://rentkr.onrender.com/api/order/viewall';
       if (filterStatus !== 'all') {
         url += `/${filterStatus}`; // Append filter status to URL if it's not 'All'
       }
@@ -25,7 +25,7 @@ const OrderManagement = () => {
 
   const handleChangeStatus = async (orderId, newStatus) => {
     try {
-      const response = await axios.put(`http://localhost:5000/api/order/${orderId}/status`, { status: newStatus });
+      const response = await axios.put(`https://rentkr.onrender.com/api/order/${orderId}/status`, { status: newStatus });
       if (response.status === 200) {
         // Update the status of the order in the local state
         const updatedOrders = orders.map(order => {

@@ -17,7 +17,7 @@ const CartPage = () => {
       setLoading(true);
       setError("");
       const userId = localStorage.getItem("userId");
-      const response = await axios.get(`http://localhost:5000/api/cart/${userId}`);
+      const response = await axios.get(`https://rentkr.onrender.com/api/cart/${userId}`);
 
       if (response && response.data) {
         setCart(response.data.items || []);
@@ -47,7 +47,7 @@ const CartPage = () => {
         )
       );
 
-      await axios.put("http://localhost:5000/api/cart/update", {
+      await axios.put("https://rentkr.onrender.com/api/cart/update", {
         userId,
         productId,
         quantity: newQuantity,
@@ -74,7 +74,7 @@ const CartPage = () => {
   const removeItemFromCart = async (productId) => {
     const userId = localStorage.getItem("userId");
     try {
-      await axios.delete(`http://localhost:5000/api/cart/${userId}/${productId}`);
+      await axios.delete(`https://rentkr.onrender.com/api/cart/${userId}/${productId}`);
       setCart(prevCart => prevCart.filter(item => item.productId._id !== productId));
       fetchCartData(); // refresh total price
     } catch (error) {

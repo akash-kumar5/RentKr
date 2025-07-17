@@ -15,7 +15,7 @@ const ProductDetail = () => {
     const fetchProduct = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/products/${productId}`
+          `https://rentkr.onrender.com/api/products/${productId}`
         );
         setProduct(response.data);
         setLoading(false);
@@ -32,11 +32,11 @@ const ProductDetail = () => {
     const fetchCart = async () => {
       try {
         if (user) {
-          const cartResponse = await axios.get(`http://localhost:5000/api/cart/${user._id}`);
+          const cartResponse = await axios.get(`https://rentkr.onrender.com/api/cart/${user._id}`);
           console.log(cartResponse.data);
           if (!cartResponse.data.items) {
             // If user does not have a cart, create one
-            const response = await axios.post("http://localhost:5000/api/cart/create", {
+            const response = await axios.post("https://rentkr.onrender.com/api/cart/create", {
               userId: user._id,
               items: [],
               totalAmount: 0,
@@ -44,7 +44,7 @@ const ProductDetail = () => {
             console.log(response);
           }
           // Fetch the cart again after creating or checking for the cart
-          const newCartResponse = await axios.get(`http://localhost:5000/api/cart/${user._id}`);
+          const newCartResponse = await axios.get(`https://rentkr.onrender.com/api/cart/${user._id}`);
           setCart(newCartResponse.data.items);
         }
       } catch (error) {
@@ -61,7 +61,7 @@ const ProductDetail = () => {
     try {
       if (user) {
         // If user is logged in, add to cart through the API
-        const cartResponse = await axios.get(`http://localhost:5000/api/cart/${user._id}`);
+        const cartResponse = await axios.get(`https://rentkr.onrender.com/api/cart/${user._id}`);
         const cart = cartResponse.data;
   
         const existingItemIndex = cart.items.findIndex((item) => item.productId === product._id);
@@ -70,7 +70,7 @@ const ProductDetail = () => {
           // If the product is already in the cart, update its quantity
           const updatedCart = [...cart.items];
           updatedCart[existingItemIndex].quantity += 1;
-          await axios.put(`http://localhost:5000/api/cart/update`, {
+          await axios.put(`https://rentkr.onrender.com/api/cart/update`, {
             userId: user._id,
             productId: product._id,
             quantity: updatedCart[existingItemIndex].quantity,
@@ -78,13 +78,13 @@ const ProductDetail = () => {
           setCart(updatedCart);  // Update the cart state
         } else {
           // If the product is not in the cart, add it to the cart
-          await axios.post("http://localhost:5000/api/cart/add", {
+          await axios.post("https://rentkr.onrender.com/api/cart/add", {
             userId: user._id,
             productId: product._id,
             quantity: 1,
             price: product.price,
           });
-          const newCartResponse = await axios.get(`http://localhost:5000/api/cart/${user._id}`);
+          const newCartResponse = await axios.get(`https://rentkr.onrender.com/api/cart/${user._id}`);
           setCart(newCartResponse.data.items);  // Update the cart state
         }
       } else {
@@ -123,7 +123,7 @@ const ProductDetail = () => {
 
     try {
       const productId = cart[index].productId;
-      await axios.delete(`http://localhost:5000/api/cart/${user._id}/${productId}`);
+      await axios.delete(`https://rentkr.onrender.com/api/cart/${user._id}/${productId}`);
       const updatedCart = [...cart];
       updatedCart.splice(index, 1);
       setCart(updatedCart);

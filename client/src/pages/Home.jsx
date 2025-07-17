@@ -17,7 +17,7 @@ const Home = () => {
       >
         <div class="carousel-inner " fade interval={3000}>
           <div class="carousel-item active p-4">
-            <NavLink to="http://localhost:3000/products/662ec63d8fc391f2acb9b575">
+            <NavLink to="https://rentkr.onrender.com/products/662ec63d8fc391f2acb9b575">
               <img
                 src="https://rentkrimages.s3.amazonaws.com/images/last.png"
                 class="d-block container-fluid ps-4 pe-4 pb-3"

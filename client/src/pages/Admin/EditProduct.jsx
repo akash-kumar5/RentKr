@@ -21,7 +21,7 @@ const navigate = useNavigate();
 
   const fetchProduct = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/products/${productId}`);
+      const response = await axios.get(`https://rentkr.onrender.com/api/products/${productId}`);
       setProduct(response.data);
       console.log(response);
     } catch (error) {
@@ -37,7 +37,7 @@ const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:5000/api/products/${productId}`, product);
+      await axios.put(`https://rentkr.onrender.com/api/products/${productId}`, product);
       alert("done")
       localStorage.removeItem("pid");
         navigate("/productmanage")

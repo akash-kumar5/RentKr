@@ -50,7 +50,7 @@ const Profile = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put('http://localhost:5000/api/auth/profile', formData);
+      const response = await axios.put('https://rentkr.onrender.com/api/auth/profile', formData);
       setProfileData(user);
       console.log('Profile updated successfully:', user);
     } catch (error) {

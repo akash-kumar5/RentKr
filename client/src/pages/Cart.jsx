@@ -17,7 +17,7 @@ const Cart = () => {
     if (userId) {
       // Fetch cart from backend if logged in
       try {
-        const response = await axios.get(`http://localhost:5000/api/cart/${userId}`);
+        const response = await axios.get(`https://rentkr.onrender.com/api/cart/${userId}`);
         cartData = response.data.items;
       } catch (error) {
         console.error('Error fetching cart data:', error);
@@ -36,7 +36,7 @@ const Cart = () => {
     
     try {
       if (userId) {
-        await axios.put(`http://localhost:5000/api/cart/update`, { userId, productId, quantity: newQuantity });
+        await axios.put(`https://rentkr.onrender.com/api/cart/update`, { userId, productId, quantity: newQuantity });
       } else {
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
         const itemIndex = cart.findIndex(item => item.productId === productId);
@@ -72,7 +72,7 @@ const Cart = () => {
     
     try {
       if (userId) {
-        await axios.delete(`http://localhost:5000/api/cart/${userId}/${productId}`);
+        await axios.delete(`https://rentkr.onrender.com/api/cart/${userId}/${productId}`);
       } else {
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
         cart = cart.filter(item => item.productId !== productId);

@@ -10,7 +10,7 @@ const CartSummary = ({ cart, updateCart }) => {
   const removeFromCart = async (productId) => {
     try {
       const userId = localStorage.getItem("userId");
-      await axios.delete(`http://localhost:5000/api/cart/${userId}/${productId}`);
+      await axios.delete(`https://rentkr.onrender.com/api/cart/${userId}/${productId}`);
       // Update the cart after removing the item
       updateCart();
     } catch (error) {

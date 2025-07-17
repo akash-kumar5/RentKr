@@ -10,7 +10,7 @@ const UserManage = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/auth/profiles');
+      const response = await axios.get('https://rentkr.onrender.com/api/auth/profiles');
       setUsers(response.data);
     } catch (error) {
       console.error('Error fetching users:', error);
@@ -20,7 +20,7 @@ const UserManage = () => {
   const deleteUser = async (userId) => {
     if (window.confirm('Are you sure you want to remove this user?')){
     try {
-      await axios.delete(`http://localhost:5000/api/auth/profile/${userId}`);
+      await axios.delete(`https://rentkr.onrender.com/api/auth/profile/${userId}`);
       fetchUsers(); // Refresh user list after deletion
     } catch (error) {
       console.error('Error deleting user:', error);
@@ -32,7 +32,7 @@ const UserManage = () => {
     if (window.confirm('Are you sure you want to make this user an admin?')) {
       try {
         // Make API call to make user an admin
-        await axios.put(`http://localhost:5000/api/auth/profile/${userId}/admin`);
+        await axios.put(`https://rentkr.onrender.com/api/auth/profile/${userId}/admin`);
         fetchUsers(); // Refresh user list after updating user role
       } catch (error) {
         console.error('Error making user an admin:', error);
