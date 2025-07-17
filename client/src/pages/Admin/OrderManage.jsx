@@ -75,7 +75,7 @@ const OrderManagement = () => {
                     ))}
                   </ul>
                   <p className="mb-2"><strong>Price:</strong> {order.totalPrice}</p>
-                  <Link to={`/order/${order._id}`} className="text-warning">View Full Order Details</Link>
+                  <Link to={`https://rentkr.onrender.com/api/order/${order._id}`} className="text-warning">View Full Order Details</Link>
                   {/* Buttons to change order status */}
                   <div className="d-flex mt-1">
                     {order.status === 'confirmed' ? (

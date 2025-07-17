@@ -55,7 +55,7 @@ const CategoryPage = () => {
       <ul className="row container-fluid">
         {filteredProducts.map(product => (
           <div key={product._id} className="col-lg-4 mb-4">
-            <Link to={`/products/${product._id}`} className='text-decoration-none'>
+            <Link to={`https://rentkr.onrender.com/api/products/${product._id}`} className='text-decoration-none'>
               <div className="card text-center bg-dark text-warning ">
                 <div className="small-square-image-container text-center m-auto ">
                   <img

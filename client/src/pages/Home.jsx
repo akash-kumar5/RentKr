@@ -31,7 +31,7 @@ const Home = () => {
             </NavLink>
           </div>
           <div class="carousel-item p-4">
-            <NavLink to="/products/663108066731f33d7743ad5e">
+            <NavLink to="https://rentkr.onrender.com/api/products/663108066731f33d7743ad5e">
             <img
               src="https://rentkrimages.s3.amazonaws.com/images/sneaker.png"
               class="d-block container-fluid ps-4 pe-4 pb-3"
@@ -45,7 +45,7 @@ const Home = () => {
             </NavLink>
           </div>
           <div class="carousel-item p-4">
-            <NavLink to="/products/662ec62f8fc391f2acb9b574">
+            <NavLink to="https://rentkr.onrender.com/api/products/662ec62f8fc391f2acb9b574">
             <img
               src="https://rentkrimages.s3.amazonaws.com/images/speaker_slide.png"
               class="d-block container-fluid ps-4 pe-4 pb-3"
@@ -82,7 +82,7 @@ const Home = () => {
       <div class="card-group container-fluid ps-5 pe-5 p-sm-2">
         <div class="card m-xl-5 m-1 rounded bg-dark btn container-fluid">
           <Link
-            to={"/products/category/Automobile"}
+            to={"https://rentkr.onrender.com/api/products/category/Automobile"}
             className="text-decoration-none"
           >
             <h1 class="bi bi-scooter p-1 ps-0 pe-0 text-center m-auto container-fluid text-warning"></h1>
@@ -96,7 +96,7 @@ const Home = () => {
 
         <div class="card m-xl-5 m-1 rounded bg-dark container-fluid">
           <h1 class="bi bi-book p-2 text-center text-warning m-auto container-fluid fs-1"></h1>
-            <Link to={"/products/category/Book"} className="text-decoration-none">
+            <Link to={"https://rentkr.onrender.com/api/products/category/Book"} className="text-decoration-none">
           <div class="card-body">
               <h5 class="card-title text-center text-warning">Books</h5>
           </div>
@@ -105,7 +105,7 @@ const Home = () => {
 
         <div class="card m-xl-5 m-1 rounded bg-dark container-fluid">
           <h1 class="bi bi-headphones p-2 text-center m-auto container-fluid text-warning"></h1>
-            <Link to={"/products/category/Electronics"} className="text-decoration-none">
+            <Link to={"https://rentkr.onrender.com/api/products/category/Electronics"} className="text-decoration-none">
           <div class="card-body">
               <h5 class="card-title text-center text-warning">Electronics</h5>
           </div>
@@ -118,7 +118,7 @@ const Home = () => {
             className="text-warning text-center m-auto pb-0 pt-4"
             size="2x"
           />
-          <Link to={"/products/category/Clothing"} className="text-decoration-none">
+          <Link to={"https://rentkr.onrender.com/api/products/category/Clothing"} className="text-decoration-none">
             <div class="card-body">
               <h5 class="card-title text-center text-warning">Clothings</h5>
             </div>
@@ -127,7 +127,7 @@ const Home = () => {
 
         <div class="card m-xl-5 m-1 rounded bg-dark container-fluid">
           <h1 class="bi bi-music-note-beamed p-2 text-center m-auto container-fluid text-warning pb-0 pt-3"></h1>
-          <Link to={"/products/category/Instrument"} className="text-decoration-none">
+          <Link to={"https://rentkr.onrender.com/api/products/category/Instrument"} className="text-decoration-none">
           <div class="card-body">
             <h5 class="card-title text-center text-warning">Instruments</h5>
           </div>

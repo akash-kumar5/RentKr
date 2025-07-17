@@ -65,7 +65,7 @@ const SearchBar = () => {
         {matchingProducts.length > 0 && (
           <ul className="list-group">
             {matchingProducts.map((product) => (
-              <Link to={`/products/${product._id}`} className="list-group-item list-group-item-action" key={product._id} onClick={handleLinkClick}>
+              <Link to={`https://rentkr.onrender.com/api/products/${product._id}`} className="list-group-item list-group-item-action" key={product._id} onClick={handleLinkClick}>
                 {product.name}
               </Link>
             ))}
