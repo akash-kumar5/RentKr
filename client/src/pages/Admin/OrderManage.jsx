@@ -25,7 +25,7 @@ const OrderManagement = () => {
 
   const handleChangeStatus = async (orderId, newStatus) => {
     try {
-      const response = await axios.put(`/order/${orderId}/status`, { status: newStatus });
+      const response = await axios.put(`https://rentkr.onrender.com/api/order/${orderId}/status`, { status: newStatus });
       if (response.status === 200) {
         // Update the status of the order in the local state
         const updatedOrders = orders.map(order => {

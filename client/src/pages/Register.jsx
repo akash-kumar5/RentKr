@@ -33,7 +33,7 @@ const Register = () => {
         return; // Exit early if passwords don't match
       }
 
-      const response = await fetch("/auth/register", {
+      const response = await fetch("https://rentkr.onrender.com/api/auth/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

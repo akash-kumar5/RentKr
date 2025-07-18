@@ -9,7 +9,7 @@ const SearchBar = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get("/products");
+        const response = await axios.get("https://rentkr.onrender.com/api/products");
         const products = response.data;
         
         if (products && Array.isArray(products)) {
