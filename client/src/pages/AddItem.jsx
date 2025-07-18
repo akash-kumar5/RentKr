@@ -11,7 +11,7 @@ const AddItem = ({ onAdd }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('https://rentkr.onrender.com/api/products/additem', {
+      const response = await fetch('/products/additem', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

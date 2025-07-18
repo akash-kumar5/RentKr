@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }) => {
   
   const userAuthentication = async () => {
     try {
-      const response = await fetch("https://rentkr.onrender.com/api/auth/user",{
+      const response = await fetch("/auth/user",{
         method: "GET",
         headers : {
           Authorization: `Bearer ${token}`,

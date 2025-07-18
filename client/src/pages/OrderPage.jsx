@@ -10,7 +10,7 @@ const OrderPage = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await axios.get(`https://rentkr.onrender.com/api/order/view/${userId}`);
+        const response = await axios.get(`/order/view/${userId}`);
         setOrders(response.data);
         setLoading(false);
       } catch (error) {

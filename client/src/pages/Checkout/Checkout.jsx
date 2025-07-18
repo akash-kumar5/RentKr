@@ -121,7 +121,7 @@ const CheckoutPage = () => {
         throw new Error("Please select delivery method and payment method.");
       }
       const userId = user._id;
-      const cartResponse = await axios.get(`https://rentkr.onrender.com/api/cart/${userId}`);
+      const cartResponse = await axios.get(`/cart/${userId}`);
       // console.log(cartResponse);
       const totalPrice=cartResponse.data.totalAmount;
       console.log(totalPrice);
@@ -140,7 +140,7 @@ const CheckoutPage = () => {
       };
       console.log(deliveryDetails);
       // Send POST request to server to create order
-      const response = await fetch("https://rentkr.onrender.com/api/order/add", {
+      const response = await fetch("/order/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

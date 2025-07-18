@@ -12,7 +12,7 @@ const ProductPage = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('https://rentkr.onrender.com/api/products');
+        const response = await axios.get('/products');
         setProducts(response.data);
         setLoading(false);
       } catch (error) {
@@ -73,7 +73,7 @@ const ProductPage = () => {
           ) : (
             filteredProducts.map(product => (
               <div key={product._id} className="col-lg-4 col-sm-6 mb-4 p-0">
-                <Link to={`https://rentkr.onrender.com/api/products/${product._id}`} className='text-decoration-none'>
+                <Link to={`/products/${product._id}`} className='text-decoration-none'>
                   <div className="card text-center bg-dark text-warning ">
                     <div className="small-square-image-container text-center m-auto ">
                       <img

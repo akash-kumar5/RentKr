@@ -9,7 +9,7 @@ const SearchBar = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get("https://rentkr.onrender.com/api/products");
+        const response = await axios.get("/products");
         const products = response.data;
         
         if (products && Array.isArray(products)) {
@@ -65,7 +65,7 @@ const SearchBar = () => {
         {matchingProducts.length > 0 && (
           <ul className="list-group">
             {matchingProducts.map((product) => (
-              <Link to={`https://rentkr.onrender.com/api/products/${product._id}`} className="list-group-item list-group-item-action" key={product._id} onClick={handleLinkClick}>
+              <Link to={`/products/${product._id}`} className="list-group-item list-group-item-action" key={product._id} onClick={handleLinkClick}>
                 {product.name}
               </Link>
             ))}

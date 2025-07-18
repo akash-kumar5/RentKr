@@ -11,7 +11,7 @@ const connnectDb = require('./utils/db');
 const errorMiddleware = require("./middlewares/error-middleware");
 
 const corsOption = {
-    origin: 'https://rentkr.vercel.app/',
+    origin: 'https://rentkr.vercel.app',
     methods: 'GET, POST, PUT, PATCH, DELETE, HEAD',   
     credentials: true,
 };

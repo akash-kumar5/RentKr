@@ -12,7 +12,7 @@ const ProductManage = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get('https://rentkr.onrender.com/api/products');
+      const response = await axios.get('/products');
       setProducts(response.data);
     } catch (error) {
       console.error('Error fetching products:', error);
@@ -21,7 +21,7 @@ const ProductManage = () => {
 
   const deleteProduct = async (productId) => {
     try {
-      await axios.delete(`https://rentkr.onrender.com/api/products/${productId}`);
+      await axios.delete(`/products/${productId}`);
       fetchProducts(); // Refresh product list after deletion
     } catch (error) {
       console.error('Error deleting product:', error);

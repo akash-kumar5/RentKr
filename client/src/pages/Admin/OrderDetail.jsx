@@ -12,7 +12,7 @@ const OrderDetails = () => {
 
   const fetchOrderDetails = async () => {
     try {
-      const response = await axios.get(`https://rentkr.onrender.com/api/order/${orderId}`);
+      const response = await axios.get(`/order/${orderId}`);
       setOrder(response.data);
     } catch (error) {
       console.error('Error fetching order details:', error);

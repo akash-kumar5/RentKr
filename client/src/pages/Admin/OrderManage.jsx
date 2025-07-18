@@ -12,7 +12,7 @@ const OrderManagement = () => {
 
   const fetchOrders = async () => {
     try {
-      let url = 'https://rentkr.onrender.com/api/order/viewall';
+      let url = '/order/viewall';
       if (filterStatus !== 'all') {
         url += `/${filterStatus}`; // Append filter status to URL if it's not 'All'
       }
@@ -25,7 +25,7 @@ const OrderManagement = () => {
 
   const handleChangeStatus = async (orderId, newStatus) => {
     try {
-      const response = await axios.put(`https://rentkr.onrender.com/api/order/${orderId}/status`, { status: newStatus });
+      const response = await axios.put(`/order/${orderId}/status`, { status: newStatus });
       if (response.status === 200) {
         // Update the status of the order in the local state
         const updatedOrders = orders.map(order => {
@@ -75,7 +75,7 @@ const OrderManagement = () => {
                     ))}
                   </ul>
                   <p className="mb-2"><strong>Price:</strong> {order.totalPrice}</p>
-                  <Link to={`https://rentkr.onrender.com/api/order/${order._id}`} className="text-warning">View Full Order Details</Link>
+                  <Link to={`/order/${order._id}`} className="text-warning">View Full Order Details</Link>
                   {/* Buttons to change order status */}
                   <div className="d-flex mt-1">
                     {order.status === 'confirmed' ? (

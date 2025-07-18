@@ -26,7 +26,7 @@ const Login = () => {
     e.preventDefault();
   
     try {
-      const response = await fetch("https://rentkr.onrender.com/api/auth/login", {
+      const response = await fetch("/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -16,7 +16,7 @@ const OrderSuccess = () => {
     const fetchOrders = async () => {
       try {
         const response = await axios.get(
-          `https://rentkr.onrender.com/api/order/view/${userId}`
+          `/order/view/${userId}`
         );
         setOrders(response.data);
         setLoading(false);
