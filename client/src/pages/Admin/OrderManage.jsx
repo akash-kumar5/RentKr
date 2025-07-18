@@ -12,7 +12,7 @@ const OrderManagement = () => {
 
   const fetchOrders = async () => {
     try {
-      let url = '/order/viewall';
+      let url = 'https://rentkr.onrender.com/api/order/viewall';
       if (filterStatus !== 'all') {
         url += `/${filterStatus}`; // Append filter status to URL if it's not 'All'
       }
